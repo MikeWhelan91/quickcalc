@@ -13,8 +13,8 @@ const items = [
 export default function Home() {
   return (
     <>
-      <section className="card" style={{marginBottom:16}}>
-        <h1 style={{margin:"0 0 8px"}}>Modern calculators that just work</h1>
+      <section className="hero" style={{ marginBottom: 16 }}>
+        <h1>Fast online calculators, instant answers</h1>
         <p className="small">Clean design, instant results, no distractions. Currency & holidays powered by free public APIs.</p>
       </section>
       <section className="grid" style={{gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))"}}>

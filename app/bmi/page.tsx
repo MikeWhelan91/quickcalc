@@ -3,12 +3,13 @@ import { useMemo, useState } from 'react';
 import CalcShell from '../components/CalcShell';
 import BmiGauge from '../components/BmiGauge';
 
-type Unit = 'metric' | 'us';
+type Unit = 'metric' | 'us' | 'uk';
 
 // acceptable human ranges (adjust if you want)
 const LIMITS = {
   metric: { cm: { min: 90, max: 250 }, kg: { min: 25, max: 250 } },
-  us:     { ft: { min: 3,  max: 7   }, in: { min: 0,  max: 11  }, lb: { min: 60, max: 550 } }
+  us:     { ft: { min: 3,  max: 7   }, in: { min: 0,  max: 11  }, lb: { min: 60, max: 550 } },
+  uk:     { ft: { min: 3,  max: 7   }, in: { min: 0,  max: 11  }, st: { min: 4, max: 50 }, lb: { min: 0, max: 13 } }
 };
 
 // parse, strip leading zeros, clamp
@@ -26,12 +27,17 @@ export default function BMIPage() {
   const [cmRaw, setCmRaw] = useState('175');
   const [kgRaw, setKgRaw] = useState('75');
 
-  // us inputs
+  // us / uk height inputs
   const [ftRaw, setFtRaw] = useState('5');
   const [inRaw, setInRaw] = useState('9');
+
+  // us weight
   const [lbRaw, setLbRaw] = useState('165');
 
-  const { cm, kg, ft, inch, lb, error } = useMemo(() => {
+  // uk weight
+  const [stRaw, setStRaw] = useState('11');
+  const [stLbRaw, setStLbRaw] = useState('0');
+  const { cm, kg, ft, inch, lb, st, error } = useMemo(() => {
     if (unit === 'metric') {
       const sH = sanitize(cmRaw, LIMITS.metric.cm.min, LIMITS.metric.cm.max);
       const sW = sanitize(kgRaw, LIMITS.metric.kg.min, LIMITS.metric.kg.max);
@@ -41,8 +47,8 @@ export default function BMIPage() {
           : (Number.isNaN(sH.n) || Number.isNaN(sW.n))
           ? 'Invalid number.'
           : '';
-      return { cm: sH.n, kg: sW.n, ft: NaN, inch: NaN, lb: NaN, error };
-    } else {
+      return { cm: sH.n, kg: sW.n, ft: NaN, inch: NaN, lb: NaN, st: NaN, error };
+    } else if (unit === 'us') {
       const sF = sanitize(ftRaw, LIMITS.us.ft.min, LIMITS.us.ft.max);
       const sI = sanitize(inRaw, LIMITS.us.in.min, LIMITS.us.in.max);
       const sL = sanitize(lbRaw, LIMITS.us.lb.min, LIMITS.us.lb.max);
@@ -52,9 +58,21 @@ export default function BMIPage() {
           : (Number.isNaN(sF.n) || Number.isNaN(sI.n) || Number.isNaN(sL.n))
           ? 'Invalid number.'
           : '';
-      return { cm: NaN, kg: NaN, ft: sF.n, inch: sI.n, lb: sL.n, error };
+      return { cm: NaN, kg: NaN, ft: sF.n, inch: sI.n, lb: sL.n, st: NaN, error };
+    } else {
+      const sF = sanitize(ftRaw, LIMITS.uk.ft.min, LIMITS.uk.ft.max);
+      const sI = sanitize(inRaw, LIMITS.uk.in.min, LIMITS.uk.in.max);
+      const sS = sanitize(stRaw, LIMITS.uk.st.min, LIMITS.uk.st.max);
+      const sP = sanitize(stLbRaw, LIMITS.uk.lb.min, LIMITS.uk.lb.max);
+      const error =
+        !sF.raw || !sI.raw || !sS.raw || !sP.raw
+          ? 'Enter height and weight.'
+          : (Number.isNaN(sF.n) || Number.isNaN(sI.n) || Number.isNaN(sS.n) || Number.isNaN(sP.n))
+          ? 'Invalid number.'
+          : '';
+      return { cm: NaN, kg: NaN, ft: sF.n, inch: sI.n, lb: sP.n, st: sS.n, error };
     }
-  }, [unit, cmRaw, kgRaw, ftRaw, inRaw, lbRaw]);
+  }, [unit, cmRaw, kgRaw, ftRaw, inRaw, lbRaw, stRaw, stLbRaw]);
 
   const bmi = useMemo(() => {
     if (error) return NaN;
@@ -63,9 +81,10 @@ export default function BMIPage() {
       return +(kg / (h * h)).toFixed(1);
     } else {
       const totalIn = ft * 12 + inch;
-      return +((lb / (totalIn * totalIn)) * 703).toFixed(1);
+      const weightLb = unit === 'us' ? lb : st * 14 + lb;
+      return +((weightLb / (totalIn * totalIn)) * 703).toFixed(1);
     }
-  }, [unit, cm, kg, ft, inch, lb, error]);
+  }, [unit, cm, kg, ft, inch, lb, st, error]);
 
   const cat = useMemo(() => {
     if (!Number.isFinite(bmi)) return '';
@@ -78,7 +97,7 @@ export default function BMIPage() {
   return (
     <CalcShell
       title="BMI Calculator"
-      subtitle="Calculate your Body Mass Index. Units: Metric or US."
+      subtitle="Calculate your Body Mass Index. Units: Metric, US or St/lb."
       result={
         <>
           <div className="kpi"><span>BMI</span><span>{Number.isFinite(bmi) ? bmi : '—'}</span></div>
@@ -94,6 +113,7 @@ export default function BMIPage() {
         <div className="segment" role="tablist" aria-label="Units">
           <button className={unit==='metric'?'active':''} onClick={()=>setUnit('metric')} role="tab" aria-selected={unit==='metric'}>Metric</button>
           <button className={unit==='us'?'active':''} onClick={()=>setUnit('us')} role="tab" aria-selected={unit==='us'}>US Units</button>
+          <button className={unit==='uk'?'active':''} onClick={()=>setUnit('uk')} role="tab" aria-selected={unit==='uk'}>St/lb</button>
         </div>
       </div>
 
@@ -125,7 +145,7 @@ export default function BMIPage() {
           </div>
           {error && <div className="help-error">{error}</div>}
         </div>
-      ) : (
+      ) : unit === 'us' ? (
         <div className="grid grid-2">
           <div>
             <label>Height</label>
@@ -137,6 +157,24 @@ export default function BMIPage() {
           <div>
             <label>Weight (lb)</label>
             <input className={`input ${error ? 'error' : ''}`} inputMode="decimal" type="text" value={lbRaw} maxLength={4} onChange={(e)=>setLbRaw(e.target.value)} />
+          </div>
+          {error && <div className="help-error">{error}</div>}
+        </div>
+      ) : (
+        <div className="grid grid-2">
+          <div>
+            <label>Height</label>
+            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e)=>setFtRaw(e.target.value)} placeholder="ft" />
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e)=>setInRaw(e.target.value)} placeholder="in" />
+            </div>
+          </div>
+          <div>
+            <label>Weight</label>
+            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stRaw} maxLength={2} onChange={(e)=>setStRaw(e.target.value)} placeholder="st" />
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stLbRaw} maxLength={2} onChange={(e)=>setStLbRaw(e.target.value)} placeholder="lb" />
+            </div>
           </div>
           {error && <div className="help-error">{error}</div>}
         </div>

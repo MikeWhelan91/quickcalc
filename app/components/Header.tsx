@@ -24,13 +24,12 @@ export default function Header(){
       <nav className="nav container">
         <Link href="/" className="brand" aria-label="Quick Calc home">
           <Image
-            src="/logos/icon-192.png"
+            src="/logos/icon-256.png"
             alt="Quick Calc logo"
-            width={34}
-            height={34}
+            width={48}
+            height={48}
             priority
           />
-          <span>Quick Calc</span>
         </Link>
 
         <button
