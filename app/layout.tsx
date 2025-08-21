@@ -15,6 +15,11 @@ export const metadata: Metadata = {
       { url: "/logos/favicon-16.png", sizes: "16x16", type: "image/png" }
     ],
     apple: { url: "/logos/icon-180.png", sizes: "180x180", type: "image/png" }
+  },
+  openGraph: {
+    title: "Quick Calc — Clean, Fast Online Calculators",
+    description: "Modern, fast calculators for everyday tasks: BMI, mortgage, loans, age, date difference, tips, and business days.",
+    images: [{ url: "/images/hero.jpg", width: 1200, height: 630, alt: "Quick Calc calculators" }]
   }
 };
 
