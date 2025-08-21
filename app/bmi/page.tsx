@@ -118,8 +118,7 @@ export default function BMIPage() {
 
   return (
     <>
-      <div className="bmi-shell">
-        <CalcShell
+      <CalcShell
           title="BMI Calculator"
           subtitle="Calculate your Body Mass Index and body fat percentage. Units: Metric, US or St/lb."
           result={<>
@@ -254,7 +253,6 @@ export default function BMIPage() {
             </div>
           )}
         </CalcShell>
-      </div>
       <section className="card bmi-info" style={{ marginTop: 24 }}>
         <h2>What is Body Mass Index?</h2>
         <p>Body mass index (BMI) is a simple measure of weight relative to height used to classify underweight, normal weight, overweight and obesity in adults.</p>
