@@ -4,28 +4,28 @@ import Image from "next/image";
 const items = [
   {
     href: "/mortgage",
-    title: "Mortgage Calculator",
+    title: "Mortgage",
     desc: "Estimate your monthly home payment and total cost",
     img: "/images/mortgage.jpg",
     alt: "House keys and mortgage paperwork"
   },
   {
     href: "/loan",
-    title: "Loan Calculator",
+    title: "Loan",
     desc: "Plan payments and interest for any personal loan",
     img: "/images/loan.jpg",
     alt: "Loan documents and calculator"
   },
   {
     href: "/bmi",
-    title: "BMI Calculator",
+    title: "BMI",
     desc: "Check your body mass index from height and weight",
     img: "/images/bmi.jpg",
     alt: "Scale and measuring tape"
   },
   {
     href: "/age",
-    title: "Age Calculator",
+    title: "Age",
     desc: "Find your exact age in years, months, and days",
     img: "/images/age.jpg",
     alt: "Clock and calendar for age"
@@ -39,7 +39,7 @@ const items = [
   },
   {
     href: "/tip",
-    title: "Tip Calculator",
+    title: "Tip",
     desc: "Quickly split restaurant bills and tips",
     img: "/images/tips.jpg",
     alt: "Receipt with tip calculation"
@@ -83,8 +83,7 @@ export default function Home() {
                 style={{ objectFit: "cover", opacity: 0.15, pointerEvents: "none" }}
               />
             </div>
-            <div className="badge" style={{marginBottom:10}}>Calculator</div>
-            <h2 style={{margin:"4px 0 6px"}}>{i.title}</h2>
+            <h2 style={{margin:"0 0 6px"}}>{i.title}</h2>
             <p className="small" style={{margin:0}}>{i.desc}</p>
           </Link>
         ))}

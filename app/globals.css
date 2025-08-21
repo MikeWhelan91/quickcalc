@@ -31,6 +31,8 @@ body{
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
 }
 
+a{color:inherit;text-decoration:none}
+
 @keyframes fadeInUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 header,main,footer{animation:fadeInUp .3s ease}
 
