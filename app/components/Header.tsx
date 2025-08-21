@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const nav = [
   { href: "/", label: "Home" },
@@ -15,16 +17,39 @@ const nav = [
 
 export default function Header(){
   const path = usePathname();
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="header">
       <nav className="nav container">
         <Link href="/" className="brand" aria-label="Quick Calc home">
-          <span className="brand-logo" aria-hidden />
+          <Image
+            src="/logos/icon-192.png"
+            alt="Quick Calc logo"
+            width={34}
+            height={34}
+            priority
+          />
           <span>Quick Calc</span>
         </Link>
-        <div className="links">
+
+        <button
+          className="menu-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
+          ☰
+        </button>
+
+        <div className={`links${open ? " open" : ""}`}>
           {nav.map(n => (
-            <Link key={n.href} href={n.href} aria-current={path === n.href ? "page" : undefined}>
+            <Link
+              key={n.href}
+              href={n.href}
+              aria-current={path === n.href ? "page" : undefined}
+              onClick={() => setOpen(false)}
+            >
               {n.label}
             </Link>
           ))}

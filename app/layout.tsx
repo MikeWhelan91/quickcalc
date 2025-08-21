@@ -5,7 +5,14 @@ import Header from "./components/Header";
 export const metadata: Metadata = {
   title: "Quick Calc — Clean, Fast Online Calculators",
   description: "Modern, fast calculators for everyday tasks: BMI, mortgage, loans, age, date difference, tips, and business days.",
-  themeColor: "#F6A313"
+  themeColor: "#98188E",
+  icons: {
+    icon: [
+      { url: "/logos/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/logos/favicon-16.png", sizes: "16x16", type: "image/png" }
+    ],
+    apple: { url: "/logos/icon-180.png", sizes: "180x180", type: "image/png" }
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
