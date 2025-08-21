@@ -171,7 +171,8 @@ export default function BMIPage() {
       {unit === 'metric' ? (
         <div className="grid grid-2">
           <div>
-            <label>Height (cm)</label>
+            <label>Height</label>
+            <label className="label-unit">Centimeters</label>
             <input
               className={`input ${error ? 'error' : ''}`}
               inputMode="decimal"
@@ -182,7 +183,8 @@ export default function BMIPage() {
               placeholder={`${LIMITS.metric.cm.min}–${LIMITS.metric.cm.max}`} />
           </div>
           <div>
-            <label>Weight (kg)</label>
+            <label>Weight</label>
+            <label className="label-unit">Kilograms</label>
             <input
               className={`input ${error ? 'error' : ''}`}
               inputMode="decimal"
@@ -192,40 +194,61 @@ export default function BMIPage() {
               onChange={(e) => setKgRaw(e.target.value)}
               placeholder={`${LIMITS.metric.kg.min}–${LIMITS.metric.kg.max}`} />
           </div>
-          {error && <div className="help-error">{error}</div>}
+          {error && <div className="help-error" style={{ gridColumn: '1 / -1' }}>{error}</div>}
         </div>
       ) : unit === 'us' ? (
         <div className="grid grid-2">
           <div>
             <label>Height</label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder="ft" />
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder="in" />
+              <div>
+                <label className="label-unit">Feet</label>
+                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder={`${LIMITS.us.ft.min}–${LIMITS.us.ft.max}`} />
+              </div>
+              <div>
+                <label className="label-unit">Inches</label>
+                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder={`${LIMITS.us.in.min}–${LIMITS.us.in.max}`} />
+              </div>
             </div>
           </div>
           <div>
-            <label>Weight (lb)</label>
-            <input className={`input ${error ? 'error' : ''}`} inputMode="decimal" type="text" value={lbRaw} maxLength={4} onChange={(e) => setLbRaw(e.target.value)} />
+            <label>Weight</label>
+            <div>
+              <label className="label-unit">Pounds</label>
+              <input className={`input ${error ? 'error' : ''}`} inputMode="decimal" type="text" value={lbRaw} maxLength={4} onChange={(e) => setLbRaw(e.target.value)} placeholder={`${LIMITS.us.lb.min}–${LIMITS.us.lb.max}`} />
+            </div>
           </div>
-          {error && <div className="help-error">{error}</div>}
+          {error && <div className="help-error" style={{ gridColumn: '1 / -1' }}>{error}</div>}
         </div>
       ) : (
         <div className="grid grid-2">
           <div>
             <label>Height</label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder="ft" />
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder="in" />
+              <div>
+                <label className="label-unit">Feet</label>
+                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder={`${LIMITS.uk.ft.min}–${LIMITS.uk.ft.max}`} />
+              </div>
+              <div>
+                <label className="label-unit">Inches</label>
+                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder={`${LIMITS.uk.in.min}–${LIMITS.uk.in.max}`} />
+              </div>
             </div>
           </div>
           <div>
             <label>Weight</label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stRaw} maxLength={2} onChange={(e) => setStRaw(e.target.value)} placeholder="st" />
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stLbRaw} maxLength={2} onChange={(e) => setStLbRaw(e.target.value)} placeholder="lb" />
+              <div>
+                <label className="label-unit">Stone</label>
+                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stRaw} maxLength={2} onChange={(e) => setStRaw(e.target.value)} placeholder={`${LIMITS.uk.st.min}–${LIMITS.uk.st.max}`} />
+              </div>
+              <div>
+                <label className="label-unit">Pounds</label>
+                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stLbRaw} maxLength={2} onChange={(e) => setStLbRaw(e.target.value)} placeholder={`${LIMITS.uk.lb.min}–${LIMITS.uk.lb.max}`} />
+              </div>
             </div>
           </div>
-          {error && <div className="help-error">{error}</div>}
+          {error && <div className="help-error" style={{ gridColumn: '1 / -1' }}>{error}</div>}
         </div>
       )}
     </CalcShell><section className="card" style={{ marginTop: 24 }}>
