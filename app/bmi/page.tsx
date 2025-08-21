@@ -1,5 +1,7 @@
 'use client';
 import { useMemo, useState } from 'react';
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import CalcShell from '../components/CalcShell';
 import BmiGauge from '../components/BmiGauge';
 
@@ -11,6 +13,18 @@ const LIMITS = {
   us:     { ft: { min: 3,  max: 7   }, in: { min: 0,  max: 11  }, lb: { min: 60, max: 550 } },
   uk:     { ft: { min: 3,  max: 7   }, in: { min: 0,  max: 11  }, st: { min: 4, max: 50 }, lb: { min: 0, max: 13 } }
 };
+
+export const metadata: Metadata = {
+  title: 'BMI Calculator — Body Mass Index',
+  description: 'Compute your Body Mass Index and learn about BMI categories, formula and limitations.',
+  keywords: ['BMI', 'Body Mass Index', 'BMI calculator', 'health'],
+  openGraph: {
+    title: 'BMI Calculator — Body Mass Index',
+    description: 'Compute your Body Mass Index and learn about BMI categories, formula and limitations.',
+    images: [{ url: '/images/bmi.jpg', width: 1200, height: 630, alt: 'BMI calculator' }],
+  },
+};
+
 
 // parse, strip leading zeros, clamp
 function sanitize(v: string, min: number, max: number) {
@@ -95,25 +109,24 @@ export default function BMIPage() {
   }, [bmi]);
 
   return (
-    <CalcShell
+     
+      <><CalcShell
       title="BMI Calculator"
       subtitle="Calculate your Body Mass Index. Units: Metric, US or St/lb."
-      result={
-        <>
-          <div className="kpi"><span>BMI</span><span>{Number.isFinite(bmi) ? bmi : '—'}</span></div>
-          <div style={{height:10}}/>
-          <div className="kpi"><span>Category</span><span>{Number.isFinite(bmi) ? cat : '—'}</span></div>
-          <div style={{height:18}}/>
-          <BmiGauge value={Number.isFinite(bmi) ? bmi : 0} />
-          <p className="small">BMI is a general indicator only, not a diagnosis.</p>
-        </>
-      }
+      result={<>
+        <div className="kpi"><span>BMI</span><span>{Number.isFinite(bmi) ? bmi : '—'}</span></div>
+        <div style={{ height: 10 }} />
+        <div className="kpi"><span>Category</span><span>{Number.isFinite(bmi) ? cat : '—'}</span></div>
+        <div style={{ height: 18 }} />
+        <BmiGauge value={Number.isFinite(bmi) ? bmi : 0} />
+        <p className="small">BMI is a general indicator only, not a diagnosis.</p>
+      </>}
     >
-      <div style={{display:'flex', alignItems:'center', gap:12, marginBottom:12}}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
         <div className="segment" role="tablist" aria-label="Units">
-          <button className={unit==='metric'?'active':''} onClick={()=>setUnit('metric')} role="tab" aria-selected={unit==='metric'}>Metric</button>
-          <button className={unit==='us'?'active':''} onClick={()=>setUnit('us')} role="tab" aria-selected={unit==='us'}>US Units</button>
-          <button className={unit==='uk'?'active':''} onClick={()=>setUnit('uk')} role="tab" aria-selected={unit==='uk'}>St/lb</button>
+          <button className={unit === 'metric' ? 'active' : ''} onClick={() => setUnit('metric')} role="tab" aria-selected={unit === 'metric'}>Metric</button>
+          <button className={unit === 'us' ? 'active' : ''} onClick={() => setUnit('us')} role="tab" aria-selected={unit === 'us'}>US Units</button>
+          <button className={unit === 'uk' ? 'active' : ''} onClick={() => setUnit('uk')} role="tab" aria-selected={unit === 'uk'}>St/lb</button>
         </div>
       </div>
 
@@ -127,9 +140,8 @@ export default function BMIPage() {
               type="text"
               value={cmRaw}
               maxLength={5}
-              onChange={(e)=> setCmRaw(e.target.value)}
-              placeholder={`${LIMITS.metric.cm.min}–${LIMITS.metric.cm.max}`}
-            />
+              onChange={(e) => setCmRaw(e.target.value)}
+              placeholder={`${LIMITS.metric.cm.min}–${LIMITS.metric.cm.max}`} />
           </div>
           <div>
             <label>Weight (kg)</label>
@@ -139,9 +151,8 @@ export default function BMIPage() {
               type="text"
               value={kgRaw}
               maxLength={6}
-              onChange={(e)=> setKgRaw(e.target.value)}
-              placeholder={`${LIMITS.metric.kg.min}–${LIMITS.metric.kg.max}`}
-            />
+              onChange={(e) => setKgRaw(e.target.value)}
+              placeholder={`${LIMITS.metric.kg.min}–${LIMITS.metric.kg.max}`} />
           </div>
           {error && <div className="help-error">{error}</div>}
         </div>
@@ -149,14 +160,14 @@ export default function BMIPage() {
         <div className="grid grid-2">
           <div>
             <label>Height</label>
-            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e)=>setFtRaw(e.target.value)} placeholder="ft" />
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e)=>setInRaw(e.target.value)} placeholder="in" />
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder="ft" />
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder="in" />
             </div>
           </div>
           <div>
             <label>Weight (lb)</label>
-            <input className={`input ${error ? 'error' : ''}`} inputMode="decimal" type="text" value={lbRaw} maxLength={4} onChange={(e)=>setLbRaw(e.target.value)} />
+            <input className={`input ${error ? 'error' : ''}`} inputMode="decimal" type="text" value={lbRaw} maxLength={4} onChange={(e) => setLbRaw(e.target.value)} />
           </div>
           {error && <div className="help-error">{error}</div>}
         </div>
@@ -164,21 +175,39 @@ export default function BMIPage() {
         <div className="grid grid-2">
           <div>
             <label>Height</label>
-            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e)=>setFtRaw(e.target.value)} placeholder="ft" />
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e)=>setInRaw(e.target.value)} placeholder="in" />
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder="ft" />
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder="in" />
             </div>
           </div>
           <div>
             <label>Weight</label>
-            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stRaw} maxLength={2} onChange={(e)=>setStRaw(e.target.value)} placeholder="st" />
-              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stLbRaw} maxLength={2} onChange={(e)=>setStLbRaw(e.target.value)} placeholder="lb" />
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stRaw} maxLength={2} onChange={(e) => setStRaw(e.target.value)} placeholder="st" />
+              <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stLbRaw} maxLength={2} onChange={(e) => setStLbRaw(e.target.value)} placeholder="lb" />
             </div>
           </div>
           {error && <div className="help-error">{error}</div>}
         </div>
       )}
-    </CalcShell>
+    </CalcShell><section className="card" style={{ marginTop: 24 }}>
+        <h2>What is Body Mass Index?</h2>
+        <p>Body mass index (BMI) is a simple measure of weight relative to height used to classify underweight, normal weight, overweight and obesity in adults.</p>
+        <Image src="/images/obesity-bmi.png" width={800} height={733} alt="Illustration showing BMI categories: normal, overweight, obese" />
+        <h3 style={{ marginTop: 24 }}>How BMI is calculated</h3>
+        <p>The formula is <strong>BMI = weight (kg) / height<sup>2</sup> (m<sup>2</sup>)</strong>. You can also use pounds and inches with the same calculator.</p>
+        <Image src="/images/bmi-chart.png" width={800} height={450} alt="BMI chart for a range of heights and weights" />
+        <h3 style={{ marginTop: 24 }}>BMI categories</h3>
+        <ul>
+          <li>Underweight: BMI below 18.5</li>
+          <li>Normal weight: 18.5 to 24.9</li>
+          <li>Overweight: 25 to 29.9</li>
+          <li>Obese: 30 or higher</li>
+        </ul>
+        <h3 style={{ marginTop: 24 }}>Limitations</h3>
+        <p>BMI does not directly measure body fat and may misclassify muscular or elderly individuals. Consult a health professional for a full assessment.</p>
+        <p className="small">Source: <a href="https://en.wikipedia.org/wiki/Body_mass_index" target="_blank" rel="noopener">Wikipedia</a></p>
+      </section></>
   );
 }
+
