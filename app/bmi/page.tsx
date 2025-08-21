@@ -6,6 +6,8 @@ import BmiGauge from '../components/BmiGauge';
 
 type Unit = 'metric' | 'us' | 'uk';
 
+const AGE_LIMITS = { min: 2, max: 120 };
+
 // acceptable human ranges (adjust if you want)
 const LIMITS = {
   metric: { cm: { min: 90, max: 250 }, kg: { min: 25, max: 250 } },
@@ -25,6 +27,10 @@ function sanitize(v: string, min: number, max: number) {
 export default function BMIPage() {
   const [unit, setUnit] = useState<Unit>('metric');
 
+  // demographics
+  const [ageRaw, setAgeRaw] = useState('30');
+  const [gender, setGender] = useState<'male' | 'female'>('male');
+
   // metric inputs
   const [cmRaw, setCmRaw] = useState('175');
   const [kgRaw, setKgRaw] = useState('75');
@@ -39,6 +45,13 @@ export default function BMIPage() {
   // uk weight
   const [stRaw, setStRaw] = useState('11');
   const [stLbRaw, setStLbRaw] = useState('0');
+
+  const ageData = useMemo(() => sanitize(ageRaw, AGE_LIMITS.min, AGE_LIMITS.max), [ageRaw]);
+  const ageError = !ageData.raw
+    ? 'Enter age.'
+    : Number.isNaN(ageData.n)
+    ? 'Invalid number.'
+    : '';
   const { cm, kg, ft, inch, lb, st, error } = useMemo(() => {
     if (unit === 'metric') {
       const sH = sanitize(cmRaw, LIMITS.metric.cm.min, LIMITS.metric.cm.max);
@@ -96,18 +109,26 @@ export default function BMIPage() {
     return 'Obesity';
   }, [bmi]);
 
+  const bfp = useMemo(() => {
+    if (!Number.isFinite(bmi) || ageError) return NaN;
+    const g = gender === 'male' ? 1 : 0;
+    return +(1.2 * bmi + 0.23 * ageData.n - 10.8 * g - 5.4).toFixed(1);
+  }, [bmi, gender, ageData.n, ageError]);
+
   return (
      
       <><CalcShell
       title="BMI Calculator"
-      subtitle="Calculate your Body Mass Index. Units: Metric, US or St/lb."
+      subtitle="Calculate your Body Mass Index and body fat percentage. Units: Metric, US or St/lb."
       result={<>
         <div className="kpi"><span>BMI</span><span>{Number.isFinite(bmi) ? bmi : '—'}</span></div>
         <div style={{ height: 10 }} />
         <div className="kpi"><span>Category</span><span>{Number.isFinite(bmi) ? cat : '—'}</span></div>
+        <div style={{ height: 10 }} />
+        <div className="kpi"><span>Body Fat %</span><span>{Number.isFinite(bfp) ? `${bfp}%` : '—'}</span></div>
         <div style={{ height: 18 }} />
         <BmiGauge value={Number.isFinite(bmi) ? bmi : 0} />
-        <p className="small">BMI is a general indicator only, not a diagnosis.</p>
+        <p className="small">BMI and body fat % are general indicators only, not a diagnosis.</p>
       </>}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
@@ -117,6 +138,35 @@ export default function BMIPage() {
           <button className={unit === 'uk' ? 'active' : ''} onClick={() => setUnit('uk')} role="tab" aria-selected={unit === 'uk'}>St/lb</button>
         </div>
       </div>
+
+      <div className="grid grid-2" style={{ marginBottom: 12 }}>
+        <div>
+          <label>Age</label>
+          <input
+            className={`input ${ageError ? 'error' : ''}`}
+            inputMode="numeric"
+            type="text"
+            value={ageRaw}
+            maxLength={3}
+            onChange={(e) => setAgeRaw(e.target.value)}
+            placeholder={`${AGE_LIMITS.min}–${AGE_LIMITS.max}`}
+          />
+        </div>
+        <div>
+          <label>Gender</label>
+          <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={() => setGender('male')} />
+              Male
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={() => setGender('female')} />
+              Female
+            </label>
+          </div>
+        </div>
+      </div>
+      {ageError && <div className="help-error">{ageError}</div>}
 
       {unit === 'metric' ? (
         <div className="grid grid-2">

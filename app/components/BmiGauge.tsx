@@ -62,7 +62,7 @@ export default function BmiGauge({ value }: Props) {
   return (
     <svg
       width="100%"
-      height="200"
+      height="260"
       viewBox={`0 0 ${VB_W} ${VB_H}`}
       style={{ display: 'block', margin: '0 auto' }}
       role="img"
