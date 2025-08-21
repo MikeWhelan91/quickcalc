@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import CalcShell from '../components/CalcShell';
 import BmiGauge from '../components/BmiGauge';
+import './styles.css';
 
 type Unit = 'metric' | 'us' | 'uk';
 
@@ -116,142 +117,145 @@ export default function BMIPage() {
   }, [bmi, gender, ageData.n, ageError]);
 
   return (
-     
-      <><CalcShell
-      title="BMI Calculator"
-      subtitle="Calculate your Body Mass Index and body fat percentage. Units: Metric, US or St/lb."
-      result={<>
-        <div className="kpi"><span>BMI</span><span>{Number.isFinite(bmi) ? bmi : '—'}</span></div>
-        <div style={{ height: 10 }} />
-        <div className="kpi"><span>Category</span><span>{Number.isFinite(bmi) ? cat : '—'}</span></div>
-        <div style={{ height: 10 }} />
-        <div className="kpi"><span>Body Fat %</span><span>{Number.isFinite(bfp) ? `${bfp}%` : '—'}</span></div>
-        <div style={{ height: 18 }} />
-        <BmiGauge value={Number.isFinite(bmi) ? bmi : 0} />
-        <p className="small">BMI and body fat % are general indicators only, not a diagnosis.</p>
-      </>}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
-        <div className="segment" role="tablist" aria-label="Units">
-          <button className={unit === 'metric' ? 'active' : ''} onClick={() => setUnit('metric')} role="tab" aria-selected={unit === 'metric'}>Metric</button>
-          <button className={unit === 'us' ? 'active' : ''} onClick={() => setUnit('us')} role="tab" aria-selected={unit === 'us'}>US Units</button>
-          <button className={unit === 'uk' ? 'active' : ''} onClick={() => setUnit('uk')} role="tab" aria-selected={unit === 'uk'}>St/lb</button>
-        </div>
-      </div>
-
-      <div className="grid grid-2" style={{ marginBottom: 12 }}>
-        <div>
-          <label>Age</label>
-          <input
-            className={`input ${ageError ? 'error' : ''}`}
-            inputMode="numeric"
-            type="text"
-            value={ageRaw}
-            maxLength={3}
-            onChange={(e) => setAgeRaw(e.target.value)}
-            placeholder={`${AGE_LIMITS.min}–${AGE_LIMITS.max}`}
-          />
-        </div>
-        <div>
-          <label>Gender</label>
-          <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={() => setGender('male')} />
-              Male
-            </label>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={() => setGender('female')} />
-              Female
-            </label>
-          </div>
-        </div>
-      </div>
-      {ageError && <div className="help-error">{ageError}</div>}
-
-      {unit === 'metric' ? (
-        <div className="grid grid-2">
-          <div>
-            <label>Height</label>
-            <label className="label-unit">Centimeters</label>
-            <input
-              className={`input ${error ? 'error' : ''}`}
-              inputMode="decimal"
-              type="text"
-              value={cmRaw}
-              maxLength={5}
-              onChange={(e) => setCmRaw(e.target.value)}
-              placeholder={`${LIMITS.metric.cm.min}–${LIMITS.metric.cm.max}`} />
-          </div>
-          <div>
-            <label>Weight</label>
-            <label className="label-unit">Kilograms</label>
-            <input
-              className={`input ${error ? 'error' : ''}`}
-              inputMode="decimal"
-              type="text"
-              value={kgRaw}
-              maxLength={6}
-              onChange={(e) => setKgRaw(e.target.value)}
-              placeholder={`${LIMITS.metric.kg.min}–${LIMITS.metric.kg.max}`} />
-          </div>
-          {error && <div className="help-error" style={{ gridColumn: '1 / -1' }}>{error}</div>}
-        </div>
-      ) : unit === 'us' ? (
-        <div className="grid grid-2">
-          <div>
-            <label>Height</label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <div>
-                <label className="label-unit">Feet</label>
-                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder={`${LIMITS.us.ft.min}–${LIMITS.us.ft.max}`} />
-              </div>
-              <div>
-                <label className="label-unit">Inches</label>
-                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder={`${LIMITS.us.in.min}–${LIMITS.us.in.max}`} />
-              </div>
+    <>
+      <div className="bmi-shell">
+        <CalcShell
+          title="BMI Calculator"
+          subtitle="Calculate your Body Mass Index and body fat percentage. Units: Metric, US or St/lb."
+          result={<>
+            <div className="kpi"><span>BMI</span><span>{Number.isFinite(bmi) ? bmi : '—'}</span></div>
+            <div style={{ height: 10 }} />
+            <div className="kpi"><span>Category</span><span>{Number.isFinite(bmi) ? cat : '—'}</span></div>
+            <div style={{ height: 10 }} />
+            <div className="kpi"><span>Body Fat %</span><span>{Number.isFinite(bfp) ? `${bfp}%` : '—'}</span></div>
+            <div style={{ height: 18 }} />
+            <BmiGauge value={Number.isFinite(bmi) ? bmi : 0} />
+            <p className="small">BMI and body fat % are general indicators only, not a diagnosis.</p>
+          </>}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+            <div className="segment" role="tablist" aria-label="Units">
+              <button className={unit === 'metric' ? 'active' : ''} onClick={() => setUnit('metric')} role="tab" aria-selected={unit === 'metric'}>Metric</button>
+              <button className={unit === 'us' ? 'active' : ''} onClick={() => setUnit('us')} role="tab" aria-selected={unit === 'us'}>US Units</button>
+              <button className={unit === 'uk' ? 'active' : ''} onClick={() => setUnit('uk')} role="tab" aria-selected={unit === 'uk'}>St/lb</button>
             </div>
           </div>
-          <div>
-            <label>Weight</label>
+
+          <div className="grid grid-2" style={{ marginBottom: 12 }}>
             <div>
-              <label className="label-unit">Pounds</label>
-              <input className={`input ${error ? 'error' : ''}`} inputMode="decimal" type="text" value={lbRaw} maxLength={4} onChange={(e) => setLbRaw(e.target.value)} placeholder={`${LIMITS.us.lb.min}–${LIMITS.us.lb.max}`} />
+              <label>Age</label>
+              <input
+                className={`input ${ageError ? 'error' : ''}`}
+                inputMode="numeric"
+                type="text"
+                value={ageRaw}
+                maxLength={3}
+                onChange={(e) => setAgeRaw(e.target.value)}
+                placeholder={`${AGE_LIMITS.min}–${AGE_LIMITS.max}`}
+              />
             </div>
-          </div>
-          {error && <div className="help-error" style={{ gridColumn: '1 / -1' }}>{error}</div>}
-        </div>
-      ) : (
-        <div className="grid grid-2">
-          <div>
-            <label>Height</label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <div>
-                <label className="label-unit">Feet</label>
-                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder={`${LIMITS.uk.ft.min}–${LIMITS.uk.ft.max}`} />
-              </div>
-              <div>
-                <label className="label-unit">Inches</label>
-                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder={`${LIMITS.uk.in.min}–${LIMITS.uk.in.max}`} />
-              </div>
-            </div>
-          </div>
-          <div>
-            <label>Weight</label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <div>
-                <label className="label-unit">Stone</label>
-                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stRaw} maxLength={2} onChange={(e) => setStRaw(e.target.value)} placeholder={`${LIMITS.uk.st.min}–${LIMITS.uk.st.max}`} />
-              </div>
-              <div>
-                <label className="label-unit">Pounds</label>
-                <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stLbRaw} maxLength={2} onChange={(e) => setStLbRaw(e.target.value)} placeholder={`${LIMITS.uk.lb.min}–${LIMITS.uk.lb.max}`} />
+            <div>
+              <label>Gender</label>
+              <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={() => setGender('male')} />
+                  Male
+                </label>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={() => setGender('female')} />
+                  Female
+                </label>
               </div>
             </div>
           </div>
-          {error && <div className="help-error" style={{ gridColumn: '1 / -1' }}>{error}</div>}
-        </div>
-      )}
-    </CalcShell><section className="card" style={{ marginTop: 24 }}>
+          {ageError && <div className="help-error">{ageError}</div>}
+
+          {unit === 'metric' ? (
+            <div className="grid grid-2">
+              <div>
+                <label>Height</label>
+                <label className="label-unit">Centimeters</label>
+                <input
+                  className={`input ${error ? 'error' : ''}`}
+                  inputMode="decimal"
+                  type="text"
+                  value={cmRaw}
+                  maxLength={5}
+                  onChange={(e) => setCmRaw(e.target.value)}
+                  placeholder={`${LIMITS.metric.cm.min}–${LIMITS.metric.cm.max}`} />
+              </div>
+              <div>
+                <label>Weight</label>
+                <label className="label-unit">Kilograms</label>
+                <input
+                  className={`input ${error ? 'error' : ''}`}
+                  inputMode="decimal"
+                  type="text"
+                  value={kgRaw}
+                  maxLength={6}
+                  onChange={(e) => setKgRaw(e.target.value)}
+                  placeholder={`${LIMITS.metric.kg.min}–${LIMITS.metric.kg.max}`} />
+              </div>
+              {error && <div className="help-error" style={{ gridColumn: '1 / -1' }}>{error}</div>}
+            </div>
+          ) : unit === 'us' ? (
+            <div className="grid grid-2">
+              <div>
+                <label>Height</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                  <div>
+                    <label className="label-unit">Feet</label>
+                    <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder={`${LIMITS.us.ft.min}–${LIMITS.us.ft.max}`} />
+                  </div>
+                  <div>
+                    <label className="label-unit">Inches</label>
+                    <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder={`${LIMITS.us.in.min}–${LIMITS.us.in.max}`} />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label>Weight</label>
+                <div>
+                  <label className="label-unit">Pounds</label>
+                  <input className={`input ${error ? 'error' : ''}`} inputMode="decimal" type="text" value={lbRaw} maxLength={4} onChange={(e) => setLbRaw(e.target.value)} placeholder={`${LIMITS.us.lb.min}–${LIMITS.us.lb.max}`} />
+                </div>
+              </div>
+              {error && <div className="help-error" style={{ gridColumn: '1 / -1' }}>{error}</div>}
+            </div>
+          ) : (
+            <div className="grid grid-2">
+              <div>
+                <label>Height</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                  <div>
+                    <label className="label-unit">Feet</label>
+                    <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={ftRaw} maxLength={1} onChange={(e) => setFtRaw(e.target.value)} placeholder={`${LIMITS.uk.ft.min}–${LIMITS.uk.ft.max}`} />
+                  </div>
+                  <div>
+                    <label className="label-unit">Inches</label>
+                    <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={inRaw} maxLength={2} onChange={(e) => setInRaw(e.target.value)} placeholder={`${LIMITS.uk.in.min}–${LIMITS.uk.in.max}`} />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label>Weight</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                  <div>
+                    <label className="label-unit">Stone</label>
+                    <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stRaw} maxLength={2} onChange={(e) => setStRaw(e.target.value)} placeholder={`${LIMITS.uk.st.min}–${LIMITS.uk.st.max}`} />
+                  </div>
+                  <div>
+                    <label className="label-unit">Pounds</label>
+                    <input className={`input ${error ? 'error' : ''}`} inputMode="numeric" type="text" value={stLbRaw} maxLength={2} onChange={(e) => setStLbRaw(e.target.value)} placeholder={`${LIMITS.uk.lb.min}–${LIMITS.uk.lb.max}`} />
+                  </div>
+                </div>
+              </div>
+              {error && <div className="help-error" style={{ gridColumn: '1 / -1' }}>{error}</div>}
+            </div>
+          )}
+        </CalcShell>
+      </div>
+      <section className="card bmi-info" style={{ marginTop: 24 }}>
         <h2>What is Body Mass Index?</h2>
         <p>Body mass index (BMI) is a simple measure of weight relative to height used to classify underweight, normal weight, overweight and obesity in adults.</p>
         <Image src="/images/obesity-bmi.png" width={800} height={733} alt="Illustration showing BMI categories: normal, overweight, obese" />
@@ -268,7 +272,8 @@ export default function BMIPage() {
         <h3 style={{ marginTop: 24 }}>Limitations</h3>
         <p>BMI does not directly measure body fat and may misclassify muscular or elderly individuals. Consult a health professional for a full assessment.</p>
         <p className="small">Source: <a href="https://en.wikipedia.org/wiki/Body_mass_index" target="_blank" rel="noopener">Wikipedia</a></p>
-      </section></>
+      </section>
+    </>
   );
 }
 
