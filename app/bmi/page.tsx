@@ -1,6 +1,5 @@
 'use client';
 import { useMemo, useState } from 'react';
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import CalcShell from '../components/CalcShell';
 import BmiGauge from '../components/BmiGauge';
@@ -12,17 +11,6 @@ const LIMITS = {
   metric: { cm: { min: 90, max: 250 }, kg: { min: 25, max: 250 } },
   us:     { ft: { min: 3,  max: 7   }, in: { min: 0,  max: 11  }, lb: { min: 60, max: 550 } },
   uk:     { ft: { min: 3,  max: 7   }, in: { min: 0,  max: 11  }, st: { min: 4, max: 50 }, lb: { min: 0, max: 13 } }
-};
-
-export const metadata: Metadata = {
-  title: 'BMI Calculator — Body Mass Index',
-  description: 'Compute your Body Mass Index and learn about BMI categories, formula and limitations.',
-  keywords: ['BMI', 'Body Mass Index', 'BMI calculator', 'health'],
-  openGraph: {
-    title: 'BMI Calculator — Body Mass Index',
-    description: 'Compute your Body Mass Index and learn about BMI categories, formula and limitations.',
-    images: [{ url: '/images/bmi.jpg', width: 1200, height: 630, alt: 'BMI calculator' }],
-  },
 };
 
 
