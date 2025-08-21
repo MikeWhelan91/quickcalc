@@ -10,11 +10,11 @@ const CUTS = { underEnd: 18.5, normalEnd: 25, overEnd: 30 };
 
 // Geometry (match these with viewBox below)
 const VB_W = 320;
-const VB_H = 220;
+const VB_H = 200;
 const cx = VB_W / 2;  // 160
-const cy = 140;       // vertical center for the dial
-const R  = 100;
-const THICK = 16;
+const cy = 160;       // vertical center for the dial
+const R  = 140;
+const THICK = 22;
 const OVERLAP_DEG = 2; // visual only: green “eats” 2° at each side
 
 // Map BMI to degrees on top semicircle (left=180°, right=360°)
@@ -51,7 +51,7 @@ export default function BmiGauge({ value }: Props) {
 
   // Needle (true mapping)
   const dVal   = toDeg(value);
-  const needle = polar(cx, cy, R - 10, dVal);
+  const needle = polar(cx, cy, R - 14, dVal);
 
   // Ticks & labels (shorter ticks; avoid “hyphen at 40”)
   const tickValues = [MIN, CUTS.underEnd, CUTS.normalEnd, CUTS.overEnd, MAX];
@@ -110,7 +110,7 @@ export default function BmiGauge({ value }: Props) {
         return (
           <g key={i}>
             <line x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke="rgba(0,0,0,.45)" strokeWidth={1.25} />
-            <text x={pl.x} y={pl.y + 4} fontSize="10" fill="#6b7280" textAnchor={anchor}>
+            <text x={pl.x} y={pl.y + 4} fontSize="12" fill="#6b7280" textAnchor={anchor}>
               {String(v)}
             </text>
           </g>
@@ -118,8 +118,8 @@ export default function BmiGauge({ value }: Props) {
       })}
 
       {/* Needle + hub */}
-      <line x1={cx} y1={cy} x2={needle.x} y2={needle.y} stroke="#0F1F3A" strokeWidth={4} strokeLinecap="round" />
-      <circle cx={cx} cy={cy} r={6} fill="#0F1F3A" />
+      <line x1={cx} y1={cy} x2={needle.x} y2={needle.y} stroke="#0F1F3A" strokeWidth={5} strokeLinecap="round" />
+      <circle cx={cx} cy={cy} r={7} fill="#0F1F3A" />
     </svg>
   );
 }
