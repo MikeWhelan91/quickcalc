@@ -1,0 +1,23 @@
+import type { Metadata } from "next";
+import "./globals.css";
+import Header from "./components/Header";
+
+export const metadata: Metadata = {
+  title: "Quick Calc — Clean, Fast Online Calculators",
+  description: "Modern, fast calculators for everyday tasks: BMI, mortgage, loans, age, date difference, tips, and business days.",
+  themeColor: "#F6A313"
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <Header />
+        <main className="container" style={{paddingTop:24}}>{children}</main>
+        <footer className="footer container">
+          <div>© {new Date().getFullYear()} Quick Calc • Fast, private, no sign-up</div>
+        </footer>
+      </body>
+    </html>
+  );
+}
