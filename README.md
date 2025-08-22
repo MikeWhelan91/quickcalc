@@ -1,4 +1,4 @@
-# Quick Calc (Next.js)
+# QuickCalc (Next.js)
 
 Clean, modern calculators with consistent styling. Includes free APIs:
 
