@@ -1,33 +1,35 @@
-"use client";
-import { useMemo, useState } from "react";
-import CalcShell from "../components/CalcShell";
-import { differenceInDays } from "@/lib/dates";
+import type { Metadata } from 'next';
+import Script from 'next/script';
+import DateDiffClient from './DateDiffClient';
 
-export default function DateDiffPage(){
-  const today = new Date().toISOString().slice(0,10);
-  const [start, setStart] = useState<string>(today);
-  const [end, setEnd] = useState<string>(today);
+export const metadata: Metadata = {
+  title: 'Date Difference Calculator — Days & Weeks Between Dates',
+  description: 'Find the number of days and weeks between two dates instantly.',
+  keywords: ['date difference calculator','days between dates','weeks between dates','duration calculator','time between dates'],
+  alternates: { canonical: '/date-diff' },
+  openGraph: {
+    title: 'Date Difference Calculator — Days & Weeks Between Dates',
+    description: 'Find the number of days and weeks between two dates instantly.',
+    images: [{ url: '/images/date.jpg', width: 1200, height: 630, alt: 'Date difference calculator' }]
+  }
+};
 
-  const res = useMemo(()=>{
-    const s = new Date(start); const e = new Date(end);
-    if (isNaN(+s) || isNaN(+e)) return null;
-    const days = differenceInDays(e, s);
-    const weeks = +(days / 7).toFixed(2);
-    return { days, weeks };
-  }, [start, end]);
-
+export default function Page() {
+  const base = process.env.SITE_URL ?? 'https://quickcalc.me';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Date Difference Calculator',
+    applicationCategory: 'UtilityApplication',
+    operatingSystem: 'Any',
+    url: `${base}/date-diff`
+  };
   return (
-    <CalcShell title="Date Difference" subtitle="Days and weeks between two dates." result={
-      res ? (<>
-        <div className="kpi"><span>Total days</span><span>{res.days}</span></div>
-        <div style={{height:10}}/>
-        <div className="kpi"><span>Total weeks</span><span>{res.weeks}</span></div>
-      </>) : (<div className="kpi"><span>Total days</span><span>—</span></div>)
-    }>
-      <div className="grid grid-2">
-        <div><label>Start date</label><input className="input" type="date" value={start} onChange={e=>setStart(e.target.value)} /></div>
-        <div><label>End date</label><input className="input" type="date" value={end} onChange={e=>setEnd(e.target.value)} /></div>
-      </div>
-    </CalcShell>
+    <>
+      <Script id="schema-date-diff" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(jsonLd)}
+      </Script>
+      <DateDiffClient />
+    </>
   );
 }
