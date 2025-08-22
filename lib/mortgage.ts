@@ -36,15 +36,15 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-US',
     fields: {
       basics: [
-        { id: 'price', label: 'Property price', default: 400000, step: 1000, tooltip: 'Total purchase price of the property.' },
-        { id: 'down', label: 'Down payment', default: 80000, step: 1000, tooltip: 'Initial amount you pay upfront.' },
-        { id: 'term', label: 'Loan term (years)', default: 30, step: 1, tooltip: 'Length of the loan in years.' },
-        { id: 'rate', label: 'Rate (APR %)', default: 4.5, step: 0.01, tooltip: 'Annual percentage interest rate.' },
+        { id: 'price', label: 'Property price', default: 400000, step: 1000, tooltip: 'Purchase price of the property.' },
+        { id: 'down', label: 'Down payment', default: 80000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
+        { id: 'term', label: 'Loan term (years)', default: 30, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'rate', label: 'Rate (APR %)', default: 4.5, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
-        { id: 'taxPct', label: 'Property tax %', default: 1.2, step: 0.1, type: 'percent', tooltip: 'Average county property tax percent.' },
-        { id: 'ins', label: 'Homeowners insurance', default: 1200, step: 100, annual: true, tooltip: 'Estimated yearly homeowner insurance.' },
-        { id: 'hoa', label: 'HOA fees', default: 0, step: 10, tooltip: 'Monthly Homeowners Association fees.' },
+        { id: 'taxPct', label: 'Property tax %', default: 1.2, step: 0.1, type: 'percent', tooltip: 'Ad valorem tax on property value expressed as a percentage.' },
+        { id: 'ins', label: 'Homeowners insurance', default: 1200, step: 100, annual: true, tooltip: 'Insurance covering a private residence and its contents.' },
+        { id: 'hoa', label: 'HOA fees', default: 0, step: 10, tooltip: 'Dues paid to a homeowners association for shared amenities.' },
       ],
       upfront: []
     },
@@ -65,18 +65,18 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-CA',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 500000, step: 1000, tooltip: 'Total purchase price of the property.' },
-        { id: 'down', label: 'Down payment', default: 100000, step: 1000, tooltip: 'Initial amount you pay upfront.' },
-        { id: 'term', label: 'Amortization (years)', default: 25, step: 1, tooltip: 'Length of the loan in years.' },
-        { id: 'rate', label: 'Rate (APR %)', default: 4.0, step: 0.01, tooltip: 'Annual percentage interest rate.' },
+        { id: 'price', label: 'Price', default: 500000, step: 1000, tooltip: 'Purchase price of the property.' },
+        { id: 'down', label: 'Down payment', default: 100000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
+        { id: 'term', label: 'Amortization (years)', default: 25, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'rate', label: 'Rate (APR %)', default: 4.0, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
-        { id: 'taxPct', label: 'Property tax %', default: 1.0, step: 0.1, type: 'percent', tooltip: 'Property tax as a percent of home price.' },
-        { id: 'ins', label: 'Home insurance', default: 1200, step: 100, annual: true, tooltip: 'Estimated yearly home insurance.' },
-        { id: 'condo', label: 'Condo fees', default: 0, step: 10, tooltip: 'Monthly condominium or strata fees.' },
+        { id: 'taxPct', label: 'Property tax %', default: 1.0, step: 0.1, type: 'percent', tooltip: 'Ad valorem tax on property value expressed as a percentage.' },
+        { id: 'ins', label: 'Home insurance', default: 1200, step: 100, annual: true, tooltip: 'Insurance covering a private residence and its contents.' },
+        { id: 'condo', label: 'Condo fees', default: 0, step: 10, tooltip: 'Monthly condominium association fees for shared property upkeep.' },
       ],
       upfront: [
-        { id: 'cmhc', label: 'CMHC insurance %', default: 0, step: 0.1, type: 'percent', tooltip: 'CMHC mortgage insurance percentage.' }
+        { id: 'cmhc', label: 'CMHC insurance %', default: 0, step: 0.1, type: 'percent', tooltip: 'Mortgage insurance from CMHC that protects lenders when the down payment is small.' }
       ]
     },
     calculate: (v) => {
@@ -99,17 +99,17 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-GB',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 350000, step: 1000, tooltip: 'Total purchase price of the property.' },
-        { id: 'down', label: 'Deposit', default: 70000, step: 1000, tooltip: 'Initial amount you pay upfront.' },
-        { id: 'term', label: 'Term (years)', default: 25, step: 1, tooltip: 'Length of the loan in years.' },
-        { id: 'rate', label: 'Rate (APR %)', default: 3.5, step: 0.01, tooltip: 'Annual percentage interest rate.' },
+        { id: 'price', label: 'Price', default: 350000, step: 1000, tooltip: 'Purchase price of the property.' },
+        { id: 'down', label: 'Deposit', default: 70000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
+        { id: 'term', label: 'Term (years)', default: 25, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'rate', label: 'Rate (APR %)', default: 3.5, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
-        { id: 'ground', label: 'Ground rent & service', default: 0, step: 10, tooltip: 'Monthly ground rent and service charges.' },
-        { id: 'ins', label: 'Insurance', default: 1000, step: 100, annual: true, tooltip: 'Estimated yearly building insurance.' },
+        { id: 'ground', label: 'Ground rent & service', default: 0, step: 10, tooltip: 'Regular ground rent and service charges paid by leaseholders.' },
+        { id: 'ins', label: 'Insurance', default: 1000, step: 100, annual: true, tooltip: 'Insurance covering the building against damage or loss.' },
       ],
       upfront: [
-        { id: 'stamp', label: 'Stamp duty %', default: 5, step: 0.1, type: 'percent', tooltip: 'Stamp duty rate applied to purchase price.' }
+        { id: 'stamp', label: 'Stamp duty %', default: 5, step: 0.1, type: 'percent', tooltip: 'Stamp duty land tax charged on property purchases.' }
       ]
     },
     calculate: (v) => {
@@ -129,17 +129,17 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-AU',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 600000, step: 1000, tooltip: 'Total purchase price of the property.' },
-        { id: 'down', label: 'Deposit', default: 120000, step: 1000, tooltip: 'Initial amount you pay upfront.' },
-        { id: 'term', label: 'Term (years)', default: 30, step: 1, tooltip: 'Length of the loan in years.' },
-        { id: 'rate', label: 'Rate (APR %)', default: 5.0, step: 0.01, tooltip: 'Annual percentage interest rate.' },
+        { id: 'price', label: 'Price', default: 600000, step: 1000, tooltip: 'Purchase price of the property.' },
+        { id: 'down', label: 'Deposit', default: 120000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
+        { id: 'term', label: 'Term (years)', default: 30, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'rate', label: 'Rate (APR %)', default: 5.0, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
-        { id: 'strata', label: 'Strata/body-corp fees', default: 0, step: 10, tooltip: 'Monthly strata or body corporate fees.' },
-        { id: 'ins', label: 'Insurance', default: 1000, step: 100, annual: true, tooltip: 'Estimated yearly home insurance.' },
+        { id: 'strata', label: 'Strata/body-corp fees', default: 0, step: 10, tooltip: 'Contributions to a body corporate for shared property upkeep.' },
+        { id: 'ins', label: 'Insurance', default: 1000, step: 100, annual: true, tooltip: 'Insurance covering a private residence and its contents.' },
       ],
       upfront: [
-        { id: 'lmi', label: 'LMI %', default: 0, step: 0.1, type: 'percent', tooltip: 'Lenders Mortgage Insurance percentage.' }
+        { id: 'lmi', label: 'LMI %', default: 0, step: 0.1, type: 'percent', tooltip: 'Lenders Mortgage Insurance that protects the lender if the borrower defaults.' }
       ]
     },
     calculate: (v) => {
@@ -159,17 +159,17 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 300000, step: 1000, tooltip: 'Total purchase price of the property.' },
-        { id: 'down', label: 'Deposit', default: 60000, step: 1000, tooltip: 'Initial amount you pay upfront.' },
-        { id: 'term', label: 'Term (years)', default: 25, step: 1, tooltip: 'Length of the loan in years.' },
-        { id: 'rate', label: 'Rate (APR %)', default: 3.8, step: 0.01, tooltip: 'Annual percentage interest rate.' },
+        { id: 'price', label: 'Price', default: 300000, step: 1000, tooltip: 'Purchase price of the property.' },
+        { id: 'down', label: 'Deposit', default: 60000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
+        { id: 'term', label: 'Term (years)', default: 25, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'rate', label: 'Rate (APR %)', default: 3.8, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
-        { id: 'taxPct', label: 'Property tax %', default: 1.0, step: 0.1, type: 'percent', tooltip: 'Property tax as a percent of home price.' },
-        { id: 'ins', label: 'Insurance', default: 800, step: 100, annual: true, tooltip: 'Estimated yearly insurance.' },
+        { id: 'taxPct', label: 'Property tax %', default: 1.0, step: 0.1, type: 'percent', tooltip: 'Ad valorem tax on property value expressed as a percentage.' },
+        { id: 'ins', label: 'Insurance', default: 800, step: 100, annual: true, tooltip: 'Insurance covering a private residence and its contents.' },
       ],
       upfront: [
-        { id: 'notary', label: 'Notary/registration fees %', default: 2, step: 0.1, type: 'percent', tooltip: 'Notary and registration fees percentage.' }
+        { id: 'notary', label: 'Notary/registration fees %', default: 2, step: 0.1, type: 'percent', tooltip: 'Percentage paid for notary and property registration services.' }
       ]
     },
     calculate: (v) => {
@@ -190,17 +190,17 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-IN',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 5000000, step: 10000, tooltip: 'Total purchase price of the property.' },
-        { id: 'down', label: 'Down payment', default: 1000000, step: 10000, tooltip: 'Initial amount you pay upfront.' },
-        { id: 'term', label: 'Term (years)', default: 20, step: 1, tooltip: 'Length of the loan in years.' },
-        { id: 'rate', label: 'Rate (APR %)', default: 8.0, step: 0.01, tooltip: 'Annual percentage interest rate.' },
+        { id: 'price', label: 'Price', default: 5000000, step: 10000, tooltip: 'Purchase price of the property.' },
+        { id: 'down', label: 'Down payment', default: 1000000, step: 10000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
+        { id: 'term', label: 'Term (years)', default: 20, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'rate', label: 'Rate (APR %)', default: 8.0, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
-        { id: 'tax', label: 'Property tax', default: 10000, step: 1000, annual: true, tooltip: 'Yearly property tax amount.' },
-        { id: 'maint', label: 'Maintenance', default: 0, step: 100, tooltip: 'Monthly maintenance or society charges.' },
+        { id: 'tax', label: 'Property tax', default: 10000, step: 1000, annual: true, tooltip: 'Yearly municipal tax on real estate.' },
+        { id: 'maint', label: 'Maintenance', default: 0, step: 100, tooltip: 'Monthly maintenance or society charges for shared services.' },
       ],
       upfront: [
-        { id: 'proc', label: 'Processing fee %', default: 1, step: 0.1, type: 'percent', tooltip: 'One-time loan processing fee percentage.' }
+        { id: 'proc', label: 'Processing fee %', default: 1, step: 0.1, type: 'percent', tooltip: 'One-time loan origination fee as a percentage of the principal.' }
       ]
     },
     calculate: (v) => {

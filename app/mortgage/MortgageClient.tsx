@@ -130,7 +130,7 @@ export default function MortgageClient() {
         <div>
           <label htmlFor="country" className="label-tooltip">
             Country
-            <span className="tooltip-icon" title="Country whose mortgage rules apply" aria-label="Country whose mortgage rules apply">?</span>
+            <span className="tooltip-icon" title="Select the country, a distinct territorial entity, to apply its mortgage rules" aria-label="Select the country, a distinct territorial entity, to apply its mortgage rules">?</span>
           </label>
           <select id="country" className="input" value={country} onChange={e => setCountry(e.target.value as CountryCode)}>
             {countries.map(c => (
@@ -141,7 +141,7 @@ export default function MortgageClient() {
         <div>
           <label htmlFor="currency" className="label-tooltip">
             Currency
-            <span className="tooltip-icon" title="Currency used for display" aria-label="Currency used for display">?</span>
+            <span className="tooltip-icon" title="Currency is a system of money; choose the unit used to display amounts" aria-label="Currency is a system of money; choose the unit used to display amounts">?</span>
           </label>
           <select id="currency" className="input" value={currency} onChange={e => setCurrency(e.target.value)}>
             {[...new Set([schema.currency, 'USD', 'EUR', 'GBP'])].map(c => (
