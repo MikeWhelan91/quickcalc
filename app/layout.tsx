@@ -6,8 +6,8 @@ import Header from "./components/Header";
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "Quick Calc — Clean, Fast Online Calculators",
-  description: "Modern, fast calculators for everyday tasks: BMI, mortgage, loans, age, date difference, tips, and business days.",
+  title: "Quick Calc — Calculators that just work",
+  description: "Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.",
   themeColor: "#98188E",
   icons: {
     icon: [
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     apple: { url: "/logos/icon-180.png", sizes: "180x180", type: "image/png" }
   },
   openGraph: {
-    title: "Quick Calc — Clean, Fast Online Calculators",
-    description: "Modern, fast calculators for everyday tasks: BMI, mortgage, loans, age, date difference, tips, and business days.",
+    title: "Quick Calc — Calculators that just work",
+    description: "Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.",
     images: [{ url: "/logos/social-1200.png", width: 1200, height: 1200, alt: "Quick Calc logo" }]
   }
 };
