@@ -2,3 +2,11 @@
   background: color-mix(in oklab,var(--primary) 3%, var(--card));
   border-color: color-mix(in oklab,var(--primary) 18%, var(--border));
 }
+
+/* Ensure informational images scale on small screens */
+.bmi-info img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 12px auto;
+}

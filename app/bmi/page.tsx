@@ -256,10 +256,24 @@ export default function BMIPage() {
       <section className="card bmi-info" style={{ marginTop: 24 }}>
         <h2>What is Body Mass Index?</h2>
         <p>Body mass index (BMI) is a simple measure of weight relative to height used to classify underweight, normal weight, overweight and obesity in adults.</p>
-        <Image src="/images/obesity-bmi.png" width={800} height={733} alt="Illustration showing BMI categories: normal, overweight, obese" />
+        <Image
+          src="/images/obesity-bmi.png"
+          width={800}
+          height={733}
+          alt="Illustration showing BMI categories: normal, overweight, obese"
+          sizes="(max-width: 800px) 100vw, 800px"
+          style={{ width: '100%', height: 'auto' }}
+        />
         <h3 style={{ marginTop: 24 }}>How BMI is calculated</h3>
         <p>The formula is <strong>BMI = weight (kg) / height<sup>2</sup> (m<sup>2</sup>)</strong>. You can also use pounds and inches with the same calculator.</p>
-        <Image src="/images/bmi-chart.png" width={800} height={450} alt="BMI chart for a range of heights and weights" />
+        <Image
+          src="/images/bmi-chart.png"
+          width={800}
+          height={450}
+          alt="BMI chart for a range of heights and weights"
+          sizes="(max-width: 800px) 100vw, 800px"
+          style={{ width: '100%', height: 'auto' }}
+        />
         <h3 style={{ marginTop: 24 }}>BMI categories</h3>
         <ul>
           <li>Underweight: BMI below 18.5</li>
