@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Quick Calc — Clean, Fast Online Calculators",
     description: "Modern, fast calculators for everyday tasks: BMI, mortgage, loans, age, date difference, tips, and business days.",
-    images: [{ url: "/images/hero.jpg", width: 1200, height: 630, alt: "Quick Calc calculators" }]
+    images: [{ url: "/logos/social-1200.png", width: 1200, height: 1200, alt: "Quick Calc logo" }]
   }
 };
 

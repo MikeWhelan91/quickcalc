@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Pacifico } from "next/font/google";
+
+const pacifico = Pacifico({ subsets: ["latin"], weight: "400" });
 
 const items = [
   {
@@ -68,6 +71,7 @@ export default function Home() {
         </div>
         <h1>Quick Calc: fast online calculators, instant answers</h1>
         <p className="small">Subtle visuals and clean design, no distractions. Currency & holidays powered by free public APIs.</p>
+
       </section>
       <section className="grid" style={{gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))"}}>
         {items.map(i => (
