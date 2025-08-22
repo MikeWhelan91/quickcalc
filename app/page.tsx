@@ -107,7 +107,7 @@ export default function Home() {
           />
         </div>
         <h1 className={outfit.className}>Calculators that just work</h1>
-        <p>Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.</p>
+        <p>Smart, clean calculators for everyday life.</p>
         <div className="hero-ctas">
           <Link href="/bmi" className="btn btn-primary">Open BMI Calculator</Link>
           <a
