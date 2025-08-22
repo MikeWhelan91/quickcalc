@@ -10,7 +10,18 @@ const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-int
 export const metadata: Metadata = {
   title: "QuickCalc — Calculators that just work",
   description: "Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.",
-  themeColor: "#98188E",
+  keywords: [
+    "online calculators",
+    "mortgage calculator",
+    "loan calculator",
+    "bmi calculator",
+    "age calculator",
+    "tip calculator",
+    "date difference",
+    "business days calculator"
+  ],
+  metadataBase: new URL("https://example.com"),
+  robots: { index: true, follow: true },
   icons: {
     icon: [
       { url: "/logos/favicon-32.png", sizes: "32x32", type: "image/png" },
@@ -21,8 +32,22 @@ export const metadata: Metadata = {
   openGraph: {
     title: "QuickCalc — Calculators that just work",
     description: "Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.",
+    url: "https://example.com",
+    siteName: "QuickCalc",
+    type: "website",
     images: [{ url: "/logos/social-1200.png", width: 1200, height: 1200, alt: "QuickCalc logo" }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "QuickCalc — Calculators that just work",
+    description: "Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.",
+    images: ["/logos/social-1200.png"],
+    creator: "@quickcalc"
   }
+};
+
+export const viewport = {
+  themeColor: "#98188E"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -48,6 +73,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             gtag('config', 'G-9ZHES1KSV3');
           `}
+        </Script>
+        <Script id="schema-website" type="application/ld+json" strategy="afterInteractive">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "QuickCalc",
+            url: "https://example.com"
+          })}
         </Script>
       </head>
       <body>
