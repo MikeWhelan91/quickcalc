@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
-const baseUrl = process.env.SITE_URL ?? "https://example.com";
+const baseUrl = process.env.SITE_URL ?? "https://quickcalc.me";
 
 export const metadata: Metadata = {
   title: "QuickCalc — Calculators that just work",

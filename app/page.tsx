@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Outfit } from "next/font/google";
 import type { Metadata } from "next";
 
-const baseUrl = process.env.SITE_URL ?? "https://example.com";
+const baseUrl = process.env.SITE_URL ?? "https://quickcalc.me";
 
 export const metadata: Metadata = {
   title: "QuickCalc – Free Online Calculators",
