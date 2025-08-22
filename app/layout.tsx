@@ -37,6 +37,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              ad_storage: 'granted',
+              analytics_storage: 'granted',
+              functionality_storage: 'granted',
+              personalization_storage: 'granted',
+              security_storage: 'granted'
+            });
             gtag('js', new Date());
 
             gtag('config', 'G-9ZHES1KSV3');
