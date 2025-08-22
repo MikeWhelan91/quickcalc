@@ -85,7 +85,7 @@ export default function MortgageClient() {
               if (f.type !== 'percent') label += ` (${symbolMap[currency]})`;
             }
             return (
-              <div key={f.id}>
+              <div key={f.id} className="form-field">
                 <div className="label-tooltip">
                   <label htmlFor={f.id}>{label}</label>
                   {f.tooltip && <Tooltip text={f.tooltip} />}
