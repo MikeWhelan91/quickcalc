@@ -82,7 +82,9 @@ label{display:block;margin-bottom:6px;font-weight:600}
 .label-unit{display:block;margin-bottom:4px;font-weight:600;font-size:.85rem;color:var(--muted)}
 .label-tooltip{display:flex;align-items:center;gap:4px;margin-bottom:6px;font-weight:600}
 .label-tooltip label{margin:0}
-.tooltip-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--muted);color:var(--white);font-size:.75rem;cursor:help}
+.tooltip-wrapper{position:relative;display:inline-block}
+.tooltip-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--muted);color:var(--white);font-size:.75rem;cursor:pointer}
+.tooltip-bubble{position:absolute;top:100%;left:0;z-index:20;margin-top:4px;padding:6px 8px;border-radius:6px;background:var(--navy);color:var(--white);font-size:.75rem;max-width:200px;box-shadow:0 4px 8px rgba(0,0,0,.1)}
 .label-tooltip .tooltip-icon:hover{background:var(--primary)}
 
 .grid{display:grid;gap:16px}
