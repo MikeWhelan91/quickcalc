@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Outfit, Tomorrow } from "next/font/google";
+import { Outfit } from "next/font/google";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["700"], display: "swap" });
-const tomorrow = Tomorrow({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
 const items = [
   {
@@ -89,7 +88,7 @@ export default function Home() {
                 loading="lazy"
               />
             </div>
-            <h2 className={tomorrow.className}>{i.title}</h2>
+            <h2 className={outfit.className}>{i.title}</h2>
             <p>{i.desc}</p>
 
           </Link>
