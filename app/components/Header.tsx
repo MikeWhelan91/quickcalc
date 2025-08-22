@@ -22,24 +22,39 @@ export default function Header(){
   return (
     <header className="header">
       <nav className="nav container">
-        <Link href="/" className="brand" aria-label="Quick Calc home">
-          <Image
-            src="/logos/icon-256.png"
-            alt="Quick Calc logo"
-            width={48}
-            height={48}
-            priority
-          />
-        </Link>
-
         <button
           className="menu-toggle"
           aria-label="Toggle navigation"
           aria-expanded={open}
           onClick={() => setOpen(!open)}
         >
-          ☰
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
         </button>
+
+        <Link href="/" className="brand" aria-label="QuickCalc home">
+          <Image
+            src="/logos/icon-256.png"
+            alt="QuickCalc logo"
+            width={48}
+            height={48}
+            priority
+          />
+          <span className="brand-text">QuickCalc</span>
+        </Link>
 
         <div className={`links${open ? " open" : ""}`}>
           {nav.map(n => (
