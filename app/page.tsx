@@ -91,6 +91,7 @@ export default function Home() {
             </div>
             <h2 className={tomorrow.className}>{i.title}</h2>
             <p>{i.desc}</p>
+
           </Link>
         ))}
       </section>
