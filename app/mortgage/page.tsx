@@ -2,13 +2,13 @@ import MortgageClient from './MortgageClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Mortgage Calculator — Global Home Loan Estimates',
-  description: 'Calculate mortgage payments worldwide with taxes, insurance and fees in multiple currencies.',
-  keywords: ['mortgage calculator', 'home loan', 'amortization', 'property tax', 'home insurance'],
+  title: 'Mortgage Calculator — Country-Specific Home Loan Estimates',
+  description: 'Country-aware mortgage calculator for the US, Canada, UK, Australia, Europe and India with taxes, insurance, fees and upfront costs.',
+  keywords: ['mortgage calculator', 'home loan', 'amortization', 'property tax', 'home insurance', 'US', 'Canada', 'UK', 'Australia', 'India', 'Europe'],
   alternates: { canonical: '/mortgage' },
   openGraph: {
-    title: 'Mortgage Calculator — Global Home Loan Estimates',
-    description: 'Calculate mortgage payments worldwide with taxes, insurance and fees in multiple currencies.',
+    title: 'Mortgage Calculator — Country-Specific Home Loan Estimates',
+    description: 'Country-aware mortgage calculator for the US, Canada, UK, Australia, Europe and India with taxes, insurance, fees and upfront costs.',
     images: [{ url: '/images/mortgage.jpg', width: 1200, height: 630, alt: 'Mortgage calculator' }]
   }
 };
