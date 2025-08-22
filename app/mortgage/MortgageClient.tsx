@@ -85,8 +85,12 @@ export default function MortgageClient() {
             }
             return (
               <div key={f.id}>
-                <label title={f.tooltip}>{label}</label>
+                <label htmlFor={f.id} className="label-tooltip">
+                  {label}
+                  <span className="tooltip-icon" title={f.tooltip} aria-label={f.tooltip}>?</span>
+                </label>
                 <input
+                  id={f.id}
                   className="input"
                   type="number"
                   step={f.step || 1}
@@ -124,16 +128,22 @@ export default function MortgageClient() {
     >
       <div className="grid grid-2">
         <div>
-          <label>Country</label>
-          <select className="input" value={country} onChange={e => setCountry(e.target.value as CountryCode)}>
+          <label htmlFor="country" className="label-tooltip">
+            Country
+            <span className="tooltip-icon" title="Country whose mortgage rules apply" aria-label="Country whose mortgage rules apply">?</span>
+          </label>
+          <select id="country" className="input" value={country} onChange={e => setCountry(e.target.value as CountryCode)}>
             {countries.map(c => (
               <option key={c} value={c}>{c}</option>
             ))}
           </select>
         </div>
         <div>
-          <label>Currency</label>
-          <select className="input" value={currency} onChange={e => setCurrency(e.target.value)}>
+          <label htmlFor="currency" className="label-tooltip">
+            Currency
+            <span className="tooltip-icon" title="Currency used for display" aria-label="Currency used for display">?</span>
+          </label>
+          <select id="currency" className="input" value={currency} onChange={e => setCurrency(e.target.value)}>
             {[...new Set([schema.currency, 'USD', 'EUR', 'GBP'])].map(c => (
               <option key={c} value={c}>{c}</option>
             ))}
