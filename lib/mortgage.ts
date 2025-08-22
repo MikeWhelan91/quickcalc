@@ -36,9 +36,9 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-US',
     fields: {
       basics: [
-        { id: 'price', label: 'Property price', default: 400000, step: 1000, tooltip: 'Purchase price of the property.' },
-        { id: 'down', label: 'Down payment', default: 80000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
-        { id: 'term', label: 'Loan term (years)', default: 30, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'price', label: 'Property price', default: 400000, step: 1000 },
+        { id: 'down', label: 'Down payment', default: 80000, step: 1000 },
+        { id: 'term', label: 'Loan term (years)', default: 30, step: 1 },
         { id: 'rate', label: 'Rate (APR %)', default: 4.5, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
@@ -65,9 +65,9 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-CA',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 500000, step: 1000, tooltip: 'Purchase price of the property.' },
-        { id: 'down', label: 'Down payment', default: 100000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
-        { id: 'term', label: 'Amortization (years)', default: 25, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'price', label: 'Price', default: 500000, step: 1000 },
+        { id: 'down', label: 'Down payment', default: 100000, step: 1000 },
+        { id: 'term', label: 'Amortization (years)', default: 25, step: 1 },
         { id: 'rate', label: 'Rate (APR %)', default: 4.0, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
@@ -99,9 +99,9 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-GB',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 350000, step: 1000, tooltip: 'Purchase price of the property.' },
-        { id: 'down', label: 'Deposit', default: 70000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
-        { id: 'term', label: 'Term (years)', default: 25, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'price', label: 'Price', default: 350000, step: 1000 },
+        { id: 'down', label: 'Deposit', default: 70000, step: 1000 },
+        { id: 'term', label: 'Term (years)', default: 25, step: 1 },
         { id: 'rate', label: 'Rate (APR %)', default: 3.5, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
@@ -129,9 +129,9 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-AU',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 600000, step: 1000, tooltip: 'Purchase price of the property.' },
-        { id: 'down', label: 'Deposit', default: 120000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
-        { id: 'term', label: 'Term (years)', default: 30, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'price', label: 'Price', default: 600000, step: 1000 },
+        { id: 'down', label: 'Deposit', default: 120000, step: 1000 },
+        { id: 'term', label: 'Term (years)', default: 30, step: 1 },
         { id: 'rate', label: 'Rate (APR %)', default: 5.0, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
@@ -159,9 +159,9 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 300000, step: 1000, tooltip: 'Purchase price of the property.' },
-        { id: 'down', label: 'Deposit', default: 60000, step: 1000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
-        { id: 'term', label: 'Term (years)', default: 25, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'price', label: 'Price', default: 300000, step: 1000 },
+        { id: 'down', label: 'Deposit', default: 60000, step: 1000 },
+        { id: 'term', label: 'Term (years)', default: 25, step: 1 },
         { id: 'rate', label: 'Rate (APR %)', default: 3.8, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
@@ -190,9 +190,9 @@ export const schemas: Record<CountryCode, CountrySchema> = {
     locale: 'en-IN',
     fields: {
       basics: [
-        { id: 'price', label: 'Price', default: 5000000, step: 10000, tooltip: 'Purchase price of the property.' },
-        { id: 'down', label: 'Down payment', default: 1000000, step: 10000, tooltip: 'Up-front partial payment that reduces the mortgage principal.' },
-        { id: 'term', label: 'Term (years)', default: 20, step: 1, tooltip: 'Number of years scheduled to repay the mortgage.' },
+        { id: 'price', label: 'Price', default: 5000000, step: 10000 },
+        { id: 'down', label: 'Down payment', default: 1000000, step: 10000 },
+        { id: 'term', label: 'Term (years)', default: 20, step: 1 },
         { id: 'rate', label: 'Rate (APR %)', default: 8.0, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
