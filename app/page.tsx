@@ -1,6 +1,38 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Outfit } from "next/font/google";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "QuickCalc – Free Online Calculators",
+  description:
+    "Instant answers for mortgage, loan, BMI, age, date difference, tip and business day calculations.",
+  keywords: [
+    "free online calculators",
+    "mortgage calculator",
+    "loan calculator",
+    "bmi calculator",
+    "age calculator",
+    "tip calculator",
+    "date difference calculator",
+    "business days calculator"
+  ],
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: "QuickCalc – Free Online Calculators",
+    description:
+      "Instant answers for mortgage, loan, BMI, age, date difference, tip and business day calculations.",
+    url: "https://example.com",
+    images: [
+      {
+        url: "/logos/social-1200.png",
+        width: 1200,
+        height: 1200,
+        alt: "QuickCalc logo"
+      }
+    ]
+  }
+};
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
