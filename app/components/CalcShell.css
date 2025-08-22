@@ -6,7 +6,6 @@
     color-mix(in oklab,var(--primary) 12%, var(--card)),
     var(--card));
   box-shadow: var(--shadow);
-  overflow: hidden;
 }
 
 .calc-shell::before {
@@ -14,6 +13,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
+  border-radius: inherit;
   background:
     radial-gradient(120% 60% at 0% 0%, color-mix(in oklab,var(--primary) 20%, transparent), transparent),
     radial-gradient(120% 60% at 100% 100%, color-mix(in oklab,var(--primary) 20%, transparent), transparent);
@@ -22,7 +22,6 @@
 
 .calc-shell > * {
   position: relative;
-  z-index: 1;
 }
 
 .calc-shell .card {
