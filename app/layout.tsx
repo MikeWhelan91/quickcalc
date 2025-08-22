@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "./components/Header";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
@@ -26,12 +28,28 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-9ZHES1KSV3"
+        />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9ZHES1KSV3');
+          `}
+        </Script>
+      </head>
       <body>
         <Header />
         <main className="container" style={{ paddingTop: 24 }}>{children}</main>
         <footer className="footer container">
           <div>© {new Date().getFullYear()} QuickCalc • Fast, private, no sign-up</div>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
