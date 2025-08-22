@@ -34,10 +34,6 @@
   background: color-mix(in oklab,var(--primary) 10%, var(--card));
 }
 
-.calc-shell .segment button {
-  transition: background .2s ease, color .2s ease;
-}
-
 .calc-shell .segment button:not(.active):hover {
   background: color-mix(in oklab,var(--primary) 15%, var(--card));
   color: var(--primary);
