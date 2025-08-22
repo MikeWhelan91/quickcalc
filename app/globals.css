@@ -92,6 +92,8 @@ label{display:block;margin-bottom:6px;font-weight:600}
 }
 
 .badge{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:var(--white);color:var(--muted);font-weight:600}
+.section-title{margin:24px 0 12px;font-weight:700;color:var(--primary)}
+.form-section{margin-top:12px}
 .footer{border-top:1px solid var(--border);padding:28px;margin-top:52px;color:var(--muted);font-size:.95rem}
 
 .small{color:var(--muted)}
