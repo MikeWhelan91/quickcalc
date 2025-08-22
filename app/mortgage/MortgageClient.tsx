@@ -83,37 +83,39 @@ export default function MortgageClient() {
     value: Math.round(calc.monthlyTotal * rate)
   }));
 
-  const renderFields = (group: keyof typeof schema.fields, title: string) => (
-    <>
-      <div className="badge" style={{ gridColumn: "1 / -1", marginTop: 10 }}>{title}</div>
-      {schema.fields[group].map(f => {
-        let label = f.label;
-        if (f.type === 'percent') label += ' (%)';
-        else if (group === 'basics') {
-          if (f.id === 'term') label += ' (years)';
-          else if (f.id === 'rate') label += ' (% p.a.)';
-          else label += ` (${symbolMap[currency]})`;
-        } else if (group === 'recurring') {
-          if (f.annual) label += ` (${symbolMap[currency]}/yr)`;
-          else label += ` (${symbolMap[currency]}/mo)`;
-        } else if (group === 'upfront') {
-          label += ` (${symbolMap[currency]})`;
-        }
-        return (
-          <div key={f.id}>
-            <label title={f.tooltip}>{label}</label>
-            <input
-              className="input"
-              type="number"
-              step={f.step || 1}
-              value={values[f.id] ?? ''}
-              onChange={e => update(f.id, +e.target.value)}
-            />
-          </div>
-        );
-      })}
-    </>
-  );
+  function renderFields(group: keyof typeof schema.fields, title: string) {
+    return (
+      <>
+        <div className="badge" style={{ gridColumn: "1 / -1", marginTop: 10 }}>{title}</div>
+        {schema.fields[group].map(f => {
+          let label = f.label;
+          if (f.type === 'percent') label += ' (%)';
+          else if (group === 'basics') {
+            if (f.id === 'term') label += ' (years)';
+            else if (f.id === 'rate') label += ' (% p.a.)';
+            else label += ` (${symbolMap[currency]})`;
+          } else if (group === 'recurring') {
+            if (f.annual) label += ` (${symbolMap[currency]}/yr)`;
+            else label += ` (${symbolMap[currency]}/mo)`;
+          } else if (group === 'upfront') {
+            label += ` (${symbolMap[currency]})`;
+          }
+          return (
+            <div key={f.id}>
+              <label title={f.tooltip}>{label}</label>
+              <input
+                className="input"
+                type="number"
+                step={f.step || 1}
+                value={values[f.id] ?? ''}
+                onChange={e => update(f.id, +e.target.value)}
+              />
+            </div>
+          );
+        })}
+      </>
+    );
+  }
 
   return (
     <CalcShell
