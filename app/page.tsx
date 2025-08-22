@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Pacifico, Tomorrow } from "next/font/google";
+import { Outfit, Tomorrow } from "next/font/google";
 
-const pacifico = Pacifico({ subsets: ["latin"], weight: "400" });
+const outfit = Outfit({ subsets: ["latin"], weight: ["700"], display: "swap" });
 const tomorrow = Tomorrow({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
 const items = [
@@ -70,11 +70,14 @@ export default function Home() {
             sizes="100vw"
           />
         </div>
-        <h1 className={tomorrow.className}>Quick Calc: fast online calculators, instant answers</h1>
-        <p className="small">Subtle visuals and clean design, no distractions. Currency & holidays powered by free public APIs.</p>
-
+        <h1 className={outfit.className}>Calculators that just work</h1>
+        <p>Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.</p>
+        <div className="hero-ctas">
+          <Link href="/bmi" className="btn btn-primary">Open BMI Calculator</Link>
+          <Link href="#calc-grid" className="btn btn-ghost">Browse all calculators</Link>
+        </div>
       </section>
-      <section className="grid" style={{gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))"}}>
+      <section id="calc-grid" className="grid" style={{gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))"}}>
         {items.map(i => (
           <Link key={i.href} href={i.href} className="card tile" style={{display:"block"}}>
             <div className="tile-img">
@@ -86,7 +89,7 @@ export default function Home() {
                 loading="lazy"
               />
             </div>
-            <h2 style={{margin:"0 0 6px"}}>{i.title}</h2>
+            <h2 className={tomorrow.className} style={{margin:"0 0 6px"}}>{i.title}</h2>
             <p className="small" style={{margin:0}}>{i.desc}</p>
           </Link>
         ))}
