@@ -10,7 +10,7 @@ const baseUrl = process.env.SITE_URL ?? "https://quickcalc.me";
 
 export const metadata: Metadata = {
   title: "QuickCalc — Calculators that just work",
-  description: "Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.",
+  description: "Smart, clean calculators for everyday life. From mortgages to BMI—powered by free public APIs.",
   keywords: [
     "online calculators",
     "mortgage calculator",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "QuickCalc — Calculators that just work",
-    description: "Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.",
+    description: "Smart, clean calculators for everyday life. From mortgages to BMI—powered by free public APIs.",
     url: baseUrl,
     siteName: "QuickCalc",
     type: "website",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "QuickCalc — Calculators that just work",
-    description: "Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.",
+    description: "Smart, clean calculators for everyday life. From mortgages to BMI—powered by free public APIs.",
     images: ["/logos/social-1200.png"],
     creator: "@quickcalc"
   }

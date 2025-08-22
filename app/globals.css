@@ -103,7 +103,7 @@ label{display:block;margin-bottom:6px;font-weight:600}
 .badge{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:var(--white);color:var(--muted);font-weight:600}
 .form-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-top:20px}
 .section-title{margin:0 0 16px;font-size:1.1rem;font-weight:700;color:var(--navy)}
-.footer{border-top:1px solid var(--border);padding:28px;margin-top:52px;color:var(--muted);font-size:.95rem}
+.footer{border-top:1px solid var(--border);padding:28px;margin-top:52px;color:var(--muted);font-size:.95rem;text-align:right;display:flex;justify-content:flex-end}
 
 .small{color:var(--muted)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:700;cursor:pointer;text-decoration:none;min-height:48px;border:1px solid transparent}
