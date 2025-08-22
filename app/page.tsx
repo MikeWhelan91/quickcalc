@@ -64,7 +64,6 @@ export default function Home() {
             fill
             priority
             sizes="100vw"
-            style={{ objectFit: "cover", opacity: 0.2, pointerEvents: "none" }}
           />
         </div>
         <h1>Quick Calc: fast online calculators, instant answers</h1>
@@ -80,7 +79,6 @@ export default function Home() {
                 fill
                 sizes="(max-width: 600px) 100vw, 240px"
                 loading="lazy"
-                style={{ objectFit: "cover", opacity: 0.15, pointerEvents: "none" }}
               />
             </div>
             <h2 style={{margin:"0 0 6px"}}>{i.title}</h2>
