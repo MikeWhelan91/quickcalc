@@ -135,7 +135,7 @@ export const schemas: Record<CountryCode, CountrySchema> = {
         { id: 'rate', label: 'Rate (APR %)', default: 5.0, step: 0.01, tooltip: 'Annual percentage rate, the yearly cost of borrowing.' },
       ],
       recurring: [
-        { id: 'strata', label: 'Strata/body-corp fees', default: 0, step: 10, tooltip: 'Contributions to a body corporate for shared property upkeep.' },
+        { id: 'strata', label: 'Strata fees', default: 0, step: 10, tooltip: 'Contributions to a body corporate for shared property upkeep.' },
         { id: 'ins', label: 'Insurance', default: 1000, step: 100, annual: true, tooltip: 'Insurance covering a private residence and its contents.' },
       ],
       upfront: [
