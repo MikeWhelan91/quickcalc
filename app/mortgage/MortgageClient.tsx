@@ -85,10 +85,10 @@ export default function MortgageClient() {
             }
             return (
               <div key={f.id}>
-                <label htmlFor={f.id} className="label-tooltip">
-                  {label}
+                <div className="label-tooltip">
+                  <label htmlFor={f.id}>{label}</label>
                   <span className="tooltip-icon" title={f.tooltip} aria-label={f.tooltip}>?</span>
-                </label>
+                </div>
                 <input
                   id={f.id}
                   className="input"
@@ -96,6 +96,7 @@ export default function MortgageClient() {
                   step={f.step || 1}
                   value={values[f.id] ?? ''}
                   onChange={e => update(f.id, +e.target.value)}
+                  title={f.tooltip}
                 />
               </div>
             );
@@ -128,22 +129,46 @@ export default function MortgageClient() {
     >
       <div className="grid grid-2">
         <div>
-          <label htmlFor="country" className="label-tooltip">
-            Country
-            <span className="tooltip-icon" title="Select the country, a distinct territorial entity, to apply its mortgage rules" aria-label="Select the country, a distinct territorial entity, to apply its mortgage rules">?</span>
-          </label>
-          <select id="country" className="input" value={country} onChange={e => setCountry(e.target.value as CountryCode)}>
+          <div className="label-tooltip">
+            <label htmlFor="country">Country</label>
+            <span
+              className="tooltip-icon"
+              title="Select the country, a distinct territorial entity, to apply its mortgage rules"
+              aria-label="Select the country, a distinct territorial entity, to apply its mortgage rules"
+            >
+              ?
+            </span>
+          </div>
+          <select
+            id="country"
+            className="input"
+            value={country}
+            onChange={e => setCountry(e.target.value as CountryCode)}
+            title="Select the country, a distinct territorial entity, to apply its mortgage rules"
+          >
             {countries.map(c => (
               <option key={c} value={c}>{c}</option>
             ))}
           </select>
         </div>
         <div>
-          <label htmlFor="currency" className="label-tooltip">
-            Currency
-            <span className="tooltip-icon" title="Currency is a system of money; choose the unit used to display amounts" aria-label="Currency is a system of money; choose the unit used to display amounts">?</span>
-          </label>
-          <select id="currency" className="input" value={currency} onChange={e => setCurrency(e.target.value)}>
+          <div className="label-tooltip">
+            <label htmlFor="currency">Currency</label>
+            <span
+              className="tooltip-icon"
+              title="Currency is a system of money; choose the unit used to display amounts"
+              aria-label="Currency is a system of money; choose the unit used to display amounts"
+            >
+              ?
+            </span>
+          </div>
+          <select
+            id="currency"
+            className="input"
+            value={currency}
+            onChange={e => setCurrency(e.target.value)}
+            title="Currency is a system of money; choose the unit used to display amounts"
+          >
             {[...new Set([schema.currency, 'USD', 'EUR', 'GBP'])].map(c => (
               <option key={c} value={c}>{c}</option>
             ))}
