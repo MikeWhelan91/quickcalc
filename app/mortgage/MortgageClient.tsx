@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import CalcShell from "../components/CalcShell";
+import Tooltip from "../components/Tooltip";
 import { schemas, CountryCode } from "@/lib/mortgage";
 
 const symbolMap: Record<string, string> = {
@@ -87,9 +88,7 @@ export default function MortgageClient() {
               <div key={f.id}>
                 <div className="label-tooltip">
                   <label htmlFor={f.id}>{label}</label>
-                  {f.tooltip && (
-                    <span className="tooltip-icon" title={f.tooltip} aria-label={f.tooltip}>?</span>
-                  )}
+                  {f.tooltip && <Tooltip text={f.tooltip} />}
                 </div>
                 <input
                   id={f.id}
