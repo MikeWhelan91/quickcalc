@@ -128,6 +128,18 @@ export default function Home() {
           </Link>
         ))}
       </section>
+      <p className="small" style={{ textAlign: "center", marginTop: 32 }}>
+        Need PDF or image conversions? Try{' '}
+        <a
+          href="https://utilixy.com"
+          target="_blank"
+          rel="noopener"
+          title="Utilixy – Free PDF, image, and data converters"
+        >
+          Utilixy
+        </a>
+        .
+      </p>
     </>
   );
 }

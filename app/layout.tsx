@@ -88,7 +88,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="container" style={{ paddingTop: 24 }}>{children}</main>
         <footer className="footer container">
-          <div>© {new Date().getFullYear()} QuickCalc • Fast, private, no sign-up</div>
+          <div>
+            © {new Date().getFullYear()} QuickCalc • Fast, private, no sign-up •
+            <a
+              href="https://utilixy.com"
+              target="_blank"
+              rel="noopener"
+              title="Utilixy – Free PDF & image conversion tools"
+            >
+              Utilixy
+            </a>
+          </div>
         </footer>
         <Analytics />
       </body>
