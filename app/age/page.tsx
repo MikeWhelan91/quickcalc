@@ -1,40 +1,35 @@
-"use client";
-import { useMemo, useState } from "react";
-import CalcShell from "../components/CalcShell";
+import type { Metadata } from 'next';
+import Script from 'next/script';
+import AgeClient from './AgeClient';
 
-function diffYMD(from: Date, to: Date){
-  let y = to.getFullYear() - from.getFullYear();
-  let m = to.getMonth() - from.getMonth();
-  let d = to.getDate() - from.getDate();
-  if (d < 0) { m -= 1; const prev = new Date(to.getFullYear(), to.getMonth(), 0).getDate(); d += prev; }
-  if (m < 0) { y -= 1; m += 12; }
-  return { y, m, d };
-}
+export const metadata: Metadata = {
+  title: 'Age Calculator — Exact Age in Years, Months, and Days',
+  description: 'Calculate your precise age and total days lived from your birth date.',
+  keywords: ['age calculator','how old am I','date of birth calculator','days lived','exact age'],
+  alternates: { canonical: '/age' },
+  openGraph: {
+    title: 'Age Calculator — Exact Age in Years, Months, and Days',
+    description: 'Calculate your precise age and total days lived from your birth date.',
+    images: [{ url: '/images/age.jpg', width: 1200, height: 630, alt: 'Age calculator' }]
+  }
+};
 
-export default function AgePage(){
-  const [dob, setDob] = useState<string>(()=> new Date().toISOString().slice(0,10));
-  const res = useMemo(()=>{
-    const from = new Date(dob); const now = new Date();
-    if (isNaN(+from)) return null;
-    const ymd = diffYMD(from, now);
-    const days = Math.floor((now.getTime() - from.getTime()) / 86400000);
-    return { ymd, days };
-  }, [dob]);
-
+export default function Page() {
+  const base = process.env.SITE_URL ?? 'https://quickcalc.me';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Age Calculator',
+    applicationCategory: 'UtilityApplication',
+    operatingSystem: 'Any',
+    url: `${base}/age`
+  };
   return (
-    <CalcShell title="Age Calculator" subtitle="Exact age in years, months, and days." result={
-      res ? (<>
-        <div className="kpi"><span>Age</span><span>{res.ymd.y}y {res.ymd.m}m {res.ymd.d}d</span></div>
-        <div style={{height:10}}/>
-        <div className="kpi"><span>Days lived</span><span>{res.days.toLocaleString()}</span></div>
-      </>) : (<div className="kpi"><span>Age</span><span>—</span></div>)
-    }>
-      <div className="grid">
-        <div>
-          <label>Date of birth</label>
-          <input className="input" type="date" value={dob} onChange={e=>setDob(e.target.value)} />
-        </div>
-      </div>
-    </CalcShell>
+    <>
+      <Script id="schema-age" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(jsonLd)}
+      </Script>
+      <AgeClient />
+    </>
   );
 }
