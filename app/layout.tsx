@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
+const baseUrl = process.env.SITE_URL ?? "https://example.com";
 
 export const metadata: Metadata = {
   title: "QuickCalc — Calculators that just work",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     "date difference",
     "business days calculator"
   ],
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL(baseUrl),
   robots: { index: true, follow: true },
   icons: {
     icon: [
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "QuickCalc — Calculators that just work",
     description: "Clean design, instant results, no clutter. From mortgages to BMI—powered by free public APIs.",
-    url: "https://example.com",
+    url: baseUrl,
     siteName: "QuickCalc",
     type: "website",
     images: [{ url: "/logos/social-1200.png", width: 1200, height: 1200, alt: "QuickCalc logo" }]
@@ -79,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "@context": "https://schema.org",
             "@type": "WebSite",
             name: "QuickCalc",
-            url: "https://example.com"
+            url: baseUrl
           })}
         </Script>
       </head>
