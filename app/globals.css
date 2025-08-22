@@ -80,6 +80,9 @@ a{color:inherit;text-decoration:none}
 
 label{display:block;margin-bottom:6px;font-weight:600}
 .label-unit{display:block;margin-bottom:4px;font-weight:600;font-size:.85rem;color:var(--muted)}
+.label-tooltip{display:flex;align-items:center;gap:4px;margin-bottom:6px;font-weight:600}
+.tooltip-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--muted);color:var(--white);font-size:.75rem;cursor:help}
+.label-tooltip .tooltip-icon:hover{background:var(--primary)}
 
 .grid{display:grid;gap:16px}
 .grid-2{grid-template-columns:1fr 1fr}
