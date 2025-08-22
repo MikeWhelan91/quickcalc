@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mortgage Calculator — Global Home Loan Estimates',
     description: 'Calculate mortgage payments worldwide with clear sections for loan basics, recurring charges and one-off fees in your chosen currency.',
+
     images: [{ url: '/images/mortgage.jpg', width: 1200, height: 630, alt: 'Mortgage calculator' }]
   }
 };

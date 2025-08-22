@@ -1,11 +1,17 @@
 "use client";
 import { useMemo, useState } from "react";
-import CalcShell from "../components/CalcShell";
-import { amortizedPayment } from "@/lib/finance";
 
-export default function MortgageClient(){
-  const currencies = ["EUR", "USD", "GBP"] as const;
-  const symbolMap: Record<typeof currencies[number], string> = { EUR: "€", USD: "$", GBP: "£" };
+import CalcShell from "../components/CalcShell";
+import { schemas, CountryCode } from "@/lib/mortgage";
+
+const symbolMap: Record<string, string> = {
+  USD: "$",
+  EUR: "€",
+  GBP: "£",
+  CAD: "$",
+  AUD: "$",
+  INR: "₹",
+};
 
   const [currency, setCurrency] = useState<typeof currencies[number]>("EUR");
   const [amount, setAmount] = useState(300000);
@@ -27,6 +33,39 @@ export default function MortgageClient(){
   const interest = useMemo(() => m * years * 12 - principal, [m, years, principal]);
   const upfront = useMemo(() => down + stampDuty + fees, [down, stampDuty, fees]);
 
+
+  const renderFields = (group: keyof typeof schema.fields, title: string) => (
+    <>
+      <div className="badge" style={{ gridColumn: "1 / -1", marginTop: 10 }}>{title}</div>
+      {schema.fields[group].map(f => {
+        let label = f.label;
+        if (f.type === 'percent') label += ' (%)';
+        else if (group === 'basics') {
+          if (f.id === 'term') label += ' (years)';
+          else if (f.id === 'rate') label += ' (% p.a.)';
+          else label += ` (${symbolMap[currency]})`;
+        } else if (group === 'recurring') {
+          if (f.annual) label += ` (${symbolMap[currency]}/yr)`;
+          else label += ` (${symbolMap[currency]}/mo)`;
+        } else if (group === 'upfront') {
+          label += ` (${symbolMap[currency]})`;
+        }
+        return (
+          <div key={f.id}>
+            <label title={f.tooltip}>{label}</label>
+            <input
+              className="input"
+              type="number"
+              step={f.step || 1}
+              value={values[f.id] ?? ''}
+              onChange={e => update(f.id, +e.target.value)}
+            />
+          </div>
+        );
+      })}
+    </>
+  );
+
   return (
     <CalcShell
       title="Mortgage Calculator"
@@ -34,12 +73,14 @@ export default function MortgageClient(){
       result={
         <>
           <div className="kpi"><span>Monthly ({currency})</span><span>{symbolMap[currency]}{Math.round(monthlyTotal).toLocaleString()}</span></div>
+
           <div style={{ height: 10 }} />
-          <div className="kpi"><span>Total interest</span><span>{symbolMap[currency]}{Math.round(interest).toLocaleString()}</span></div>
+          <div className="kpi"><span>Total interest</span><span>{formatter.format(calc.interest)}</span></div>
           <div style={{ height: 10 }} />
           <div className="kpi"><span>Total paid</span><span>{symbolMap[currency]}{Math.round(total).toLocaleString()}</span></div>
           <div style={{ height: 10 }} />
           <div className="kpi"><span>Upfront costs</span><span>{symbolMap[currency]}{Math.round(upfront).toLocaleString()}</span></div>
+
           <p className="small">Estimates only. Taxes and fees are approximations.</p>
         </>
       }
@@ -74,7 +115,11 @@ export default function MortgageClient(){
         <div className="grid grid-2">
           <div><label>Stamp duty <span className="label-unit">{symbolMap[currency]}</span></label><input className="input" type="number" step={100} value={stampDuty} onChange={e => setStampDuty(+e.target.value)} /></div>
           <div><label>Other fees <span className="label-unit">{symbolMap[currency]}</span></label><input className="input" type="number" step={100} value={fees} onChange={e => setFees(+e.target.value)} /></div>
+
         </div>
+        {renderFields('basics', 'Loan basics')}
+        {renderFields('recurring', 'Recurring costs')}
+        {renderFields('upfront', 'One-off costs')}
       </div>
     </CalcShell>
   );
