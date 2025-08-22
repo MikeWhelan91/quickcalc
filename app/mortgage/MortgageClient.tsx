@@ -30,7 +30,6 @@ export default function MortgageClient() {
     return d;
   })();
   const [values, setValues] = useState<Record<string, number>>(defaultValues);
-  const [fx, setFx] = useState<{ rates?: Record<string, number> }>({});
 
   // initialise country from query/localStorage
   useEffect(() => {
@@ -60,17 +59,6 @@ export default function MortgageClient() {
     }
   }, [country, router]);
 
-  // fx conversion
-  useEffect(() => {
-    const base = currency;
-    const all = ["USD", "EUR", "GBP"];
-    const symbols = all.filter(c => c !== base).join(",");
-    fetch(`/api/fx?base=${base}&symbols=${symbols}`)
-      .then(r => r.json())
-      .then(setFx)
-      .catch(() => {});
-  }, [currency]);
-
   const update = (id: string, value: number) => {
     setValues(v => ({ ...v, [id]: value }));
   };
@@ -78,42 +66,38 @@ export default function MortgageClient() {
   const calc = useMemo(() => schema.calculate(values), [schema, values]);
   const formatter = useMemo(() => new Intl.NumberFormat(schema.locale, { style: "currency", currency }), [schema.locale, currency]);
 
-  const conversions = Object.entries(fx.rates || {}).map(([code, rate]) => ({
-    code,
-    value: Math.round(calc.monthlyTotal * rate)
-  }));
-
   function renderFields(group: keyof typeof schema.fields, title: string) {
     return (
-      <>
-        <div className="badge" style={{ gridColumn: "1 / -1", marginTop: 10 }}>{title}</div>
-        {schema.fields[group].map(f => {
-          let label = f.label;
-          if (f.type === 'percent') label += ' (%)';
-          else if (group === 'basics') {
-            if (f.id === 'term') label += ' (years)';
-            else if (f.id === 'rate') label += ' (% p.a.)';
-            else label += ` (${symbolMap[currency]})`;
-          } else if (group === 'recurring') {
-            if (f.annual) label += ` (${symbolMap[currency]}/yr)`;
-            else label += ` (${symbolMap[currency]}/mo)`;
-          } else if (group === 'upfront') {
-            label += ` (${symbolMap[currency]})`;
-          }
-          return (
-            <div key={f.id}>
-              <label title={f.tooltip}>{label}</label>
-              <input
-                className="input"
-                type="number"
-                step={f.step || 1}
-                value={values[f.id] ?? ''}
-                onChange={e => update(f.id, +e.target.value)}
-              />
-            </div>
-          );
-        })}
-      </>
+      <div className="form-section" style={{ gridColumn: "1 / -1" }}>
+        <h3 className="section-title">{title}</h3>
+        <div className="grid grid-2">
+          {schema.fields[group].map(f => {
+            let label = f.label;
+            if (group === 'basics') {
+              if (["price", "down"].includes(f.id)) label += ` (${symbolMap[currency]})`;
+            } else if (group === 'recurring') {
+              if (f.type !== 'percent') {
+                if (f.annual) label += ` (${symbolMap[currency]}/yr)`;
+                else label += ` (${symbolMap[currency]}/mo)`;
+              }
+            } else if (group === 'upfront') {
+              if (f.type !== 'percent') label += ` (${symbolMap[currency]})`;
+            }
+            return (
+              <div key={f.id}>
+                <label title={f.tooltip}>{label}</label>
+                <input
+                  className="input"
+                  type="number"
+                  step={f.step || 1}
+                  value={values[f.id] ?? ''}
+                  onChange={e => update(f.id, +e.target.value)}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
     );
   }
 
@@ -124,12 +108,6 @@ export default function MortgageClient() {
       result={
         <>
           <div className="kpi"><span>Monthly ({currency})</span><span>{formatter.format(calc.monthlyTotal)}</span></div>
-          {conversions.map(c => (
-            <div key={c.code}>
-              <div style={{ height: 10 }} />
-              <div className="kpi"><span>Monthly ({c.code})</span><span>{symbolMap[c.code as keyof typeof symbolMap] || ''}{c.value.toLocaleString()}</span></div>
-            </div>
-          ))}
           <div style={{ height: 10 }} />
           <div className="kpi"><span>Total interest</span><span>{formatter.format(calc.interest)}</span></div>
           <div style={{ height: 10 }} />
