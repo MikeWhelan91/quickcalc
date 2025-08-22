@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Pacifico } from "next/font/google";
+import { Pacifico, Tomorrow } from "next/font/google";
 
 const pacifico = Pacifico({ subsets: ["latin"], weight: "400" });
+const tomorrow = Tomorrow({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
 const items = [
   {
@@ -69,7 +70,7 @@ export default function Home() {
             sizes="100vw"
           />
         </div>
-        <h1>Quick Calc: fast online calculators, instant answers</h1>
+        <h1 className={tomorrow.className}>Quick Calc: fast online calculators, instant answers</h1>
         <p className="small">Subtle visuals and clean design, no distractions. Currency & holidays powered by free public APIs.</p>
 
       </section>
