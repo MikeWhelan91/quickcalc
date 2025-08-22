@@ -79,7 +79,7 @@ export default function Home() {
       </section>
       <section id="calc-grid" className="grid" style={{gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))"}}>
         {items.map(i => (
-          <Link key={i.href} href={i.href} className="card tile" style={{display:"block"}}>
+          <Link key={i.href} href={i.href} className="card tile">
             <div className="tile-img">
               <Image
                 src={i.img}
@@ -89,8 +89,9 @@ export default function Home() {
                 loading="lazy"
               />
             </div>
-            <h2 className={tomorrow.className} style={{margin:"0 0 6px"}}>{i.title}</h2>
-            <p className="small" style={{margin:0}}>{i.desc}</p>
+            <h2 className={tomorrow.className}>{i.title}</h2>
+            <p>{i.desc}</p>
+
           </Link>
         ))}
       </section>
