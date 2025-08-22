@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Mortgage Calculator — Country-Specific Home Loan Estimates',
   description: 'Country-aware mortgage calculator for the US, Canada, UK, Australia, Europe and India with taxes, insurance, fees and upfront costs.',
-  keywords: ['mortgage calculator', 'home loan', 'amortization', 'down payment', 'property tax', 'home insurance', 'HOA fees', 'strata fees', 'condo fees', 'ground rent', 'stamp duty', 'CMHC insurance', 'LMI', 'notary fees', 'processing fee', 'US', 'Canada', 'UK', 'Australia', 'India', 'Europe'],
+  keywords: ['mortgage calculator', 'home loan', 'amortization', 'down payment', 'property tax', 'home insurance', 'HOA fees', 'strata fees', 'body corporate fees', 'condo fees', 'ground rent', 'stamp duty', 'CMHC insurance', 'LMI', 'notary fees', 'processing fee', 'US', 'Canada', 'UK', 'Australia', 'India', 'Europe'],
   alternates: { canonical: '/mortgage' },
   openGraph: {
     title: 'Mortgage Calculator — Country-Specific Home Loan Estimates',
