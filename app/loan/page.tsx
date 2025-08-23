@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import LoanClient from './LoanClient';
+import LoanGuide from './LoanGuide';
 
 export const metadata: Metadata = {
   title: 'Loan Calculator — Monthly Payment & Interest Estimator',
@@ -30,6 +31,7 @@ export default function Page() {
         {JSON.stringify(jsonLd)}
       </Script>
       <LoanClient />
+      <LoanGuide />
     </>
   );
 }

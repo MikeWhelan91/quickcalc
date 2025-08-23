@@ -12,7 +12,8 @@ const nav = [
   { href: "/age", label: "Age" },
   { href: "/date-diff", label: "Date Diff" },
   { href: "/tip", label: "Tip" },
-  { href: "/business-days", label: "Business Days" }
+  { href: "/business-days", label: "Business Days" },
+  { href: "/compound-interest", label: "Compound" }
 ];
 
 export default function Header(){
