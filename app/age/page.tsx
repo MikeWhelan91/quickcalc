@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import AgeClient from './AgeClient';
+import AgeGuide from './AgeGuide';
 
 export const metadata: Metadata = {
   title: 'Age Calculator — Exact Age in Years, Months, and Days',
@@ -30,6 +31,7 @@ export default function Page() {
         {JSON.stringify(jsonLd)}
       </Script>
       <AgeClient />
+      <AgeGuide />
     </>
   );
 }
