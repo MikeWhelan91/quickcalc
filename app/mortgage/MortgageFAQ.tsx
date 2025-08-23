@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function MortgageFAQ() {
   return (
-    <section className="faq">
+    <section className="card faq" style={{ marginTop: 24 }}>
       <h2>Mortgage FAQs</h2>
       <div>
         <h3>What is a mortgage?</h3>

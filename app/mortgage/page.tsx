@@ -2,7 +2,6 @@ import MortgageClient from './MortgageClient';
 import MortgageFAQ from './MortgageFAQ';
 import Script from 'next/script';
 import type { Metadata } from 'next';
-import MortgageGuide from './MortgageGuide';
 
 export const metadata: Metadata = {
   title: 'Mortgage Calculator — Country-Specific Home Loan Estimates',
@@ -70,7 +69,6 @@ export default function Page() {
       </Script>
       <MortgageClient />
       <MortgageFAQ />
-      <MortgageGuide />
     </>
   );
 }
