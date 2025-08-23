@@ -16,6 +16,8 @@ export default function MortgageFAQ() {
           alt="30-year mortgage calculator screenshot"
           width={640}
           height={360}
+          sizes="(max-width: 640px) 100vw, 640px"
+          style={{ width: '100%', height: 'auto' }}
         />
       </div>
       <div>
@@ -30,6 +32,8 @@ export default function MortgageFAQ() {
           alt="Compound interest diagram"
           width={640}
           height={360}
+          sizes="(max-width: 640px) 100vw, 640px"
+          style={{ width: '100%', height: 'auto' }}
         />
       </div>
       <div>
