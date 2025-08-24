@@ -2,8 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Outfit } from "next/font/google";
 import type { Metadata } from "next";
-
-const baseUrl = process.env.SITE_URL ?? "https://quickcalc.me";
+import { canonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "QuickCalc – Free Online Calculators",
@@ -19,12 +18,12 @@ export const metadata: Metadata = {
     "date difference calculator",
     "business days calculator"
   ],
-  alternates: { canonical: '/' },
+  alternates: { canonical: canonical('/') },
   openGraph: {
     title: "QuickCalc – Free Online Calculators",
     description:
       "Instant answers for mortgage, loan, BMI, age, date difference, tip and business day calculations.",
-    url: baseUrl,
+    url: canonical('/'),
     images: [
       {
         url: "/logos/social-1200.png",
