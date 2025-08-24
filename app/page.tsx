@@ -8,7 +8,7 @@ const baseUrl = process.env.SITE_URL ?? "https://quickcalc.me";
 export const metadata: Metadata = {
   title: "QuickCalc – Free Online Calculators",
   description:
-    "Instant answers for mortgage, loan, BMI, age, date difference, tip and business day calculations. Need PDF or image conversions? Try Utilixy.",
+    "Instant answers for mortgage, loan, BMI, age, date difference, tip and business day calculations.",
   keywords: [
     "free online calculators",
     "mortgage calculator",
@@ -17,16 +17,13 @@ export const metadata: Metadata = {
     "age calculator",
     "tip calculator",
     "date difference calculator",
-    "business days calculator",
-    "pdf converter",
-    "image converter",
-    "utilixy"
+    "business days calculator"
   ],
   alternates: { canonical: '/' },
   openGraph: {
     title: "QuickCalc – Free Online Calculators",
     description:
-      "Instant answers for mortgage, loan, BMI, age, date difference, tip and business day calculations. Need PDF or image conversions? Try Utilixy.",
+      "Instant answers for mortgage, loan, BMI, age, date difference, tip and business day calculations.",
     url: baseUrl,
     images: [
       {
@@ -110,15 +107,6 @@ export default function Home() {
         <p>Smart, clean calculators for everyday life.</p>
         <div className="hero-ctas">
           <Link href="/bmi" className="btn btn-primary">Open BMI Calculator</Link>
-          <a
-            href="https://utilixy.com"
-            target="_blank"
-            rel="noopener"
-            className="btn btn-ghost"
-            title="Utilixy – Free PDF, image, and data converters"
-          >
-            Visit utilixy.com
-          </a>
         </div>
       </section>
       <section id="calc-grid" className="grid" style={{gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))"}}>
@@ -139,19 +127,6 @@ export default function Home() {
           </Link>
         ))}
       </section>
-      <p className="small" style={{ textAlign: "center", marginTop: 32 }}>
-        Need PDF or image conversions? Try{' '}
-        <a
-          href="https://utilixy.com"
-          target="_blank"
-          rel="noopener"
-          className="fancy-link"
-          title="Utilixy – Free PDF, image, and data converters"
-        >
-          Utilixy
-        </a>
-        .
-      </p>
     </>
   );
 }
