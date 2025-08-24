@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import Header from "./components/Header";
 import { Analytics } from "@vercel/analytics/next";
+import ConsentBanner from "./components/ConsentBanner";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 const baseUrl = process.env.SITE_URL ?? "https://quickcalc.me";
@@ -64,10 +65,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('consent', 'default', {
-              ad_storage: 'granted',
-              analytics_storage: 'granted',
-              functionality_storage: 'granted',
-              personalization_storage: 'granted',
+              ad_storage: 'denied',
+              analytics_storage: 'denied',
+              functionality_storage: 'denied',
+              personalization_storage: 'denied',
               security_storage: 'granted'
             });
             gtag('js', new Date());
@@ -89,17 +90,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="container" style={{ paddingTop: 24 }}>{children}</main>
         <footer className="footer container">
           <div>
-            © {new Date().getFullYear()} QuickCalc • Fast, private, no sign-up •
-            <a
-              href="https://utilixy.com"
-              target="_blank"
-              rel="noopener"
-              title="Utilixy – Free PDF & image conversion tools"
-            >
-              Utilixy
-            </a>
+            © {new Date().getFullYear()} QuickCalc • Fast, private, no sign-up
           </div>
         </footer>
+        <ConsentBanner />
         <Analytics />
       </body>
     </html>
