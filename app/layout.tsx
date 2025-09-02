@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import Link from "next/link";
 import "./globals.css";
 import Header from "./components/Header";
 import { Analytics } from "@vercel/analytics/next";
@@ -22,7 +23,11 @@ export const metadata: Metadata = {
     "date difference",
     "business days calculator",
     "calculator guides",
-    "calculator faq"
+    "calculator faq",
+    "bmi guide",
+    "date difference guide",
+    "tip guide",
+    "business days guide"
   ],
   metadataBase: new URL(baseUrl),
   robots: { index: true, follow: true },
@@ -92,7 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="container" style={{ paddingTop: 24 }}>{children}</main>
         <footer className="footer container">
           <div>
-            © {new Date().getFullYear()} QuickCalc • Fast, private, no sign-up
+            © {new Date().getFullYear()} QuickCalc • Fast, private, no sign-up • <Link href="/guides">Guides</Link> • <Link href="/faq">FAQ</Link>
           </div>
         </footer>
         <ConsentBanner />

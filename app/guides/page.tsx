@@ -8,10 +8,13 @@ export const metadata: Metadata = {
     'In-depth guides explaining how our calculators work and the formulas they use.',
   keywords: [
     'calculator guides',
-    'mortgage guide',
     'loan guide',
     'age calculator help',
-    'compound interest guide'
+    'compound interest guide',
+    'bmi guide',
+    'date difference guide',
+    'tip guide',
+    'business days guide'
   ],
   alternates: { canonical: canonical('/guides') },
   openGraph: {
@@ -40,6 +43,26 @@ const guides = [
     href: '/compound-interest',
     title: 'Compound Interest Guide',
     desc: 'Learn the formula behind growing investments.'
+  },
+  {
+    href: '/bmi',
+    title: 'BMI Calculator Guide',
+    desc: 'Formula for body mass index and weight categories.'
+  },
+  {
+    href: '/date-diff',
+    title: 'Date Difference Guide',
+    desc: 'Understand how we count days between dates.'
+  },
+  {
+    href: '/tip',
+    title: 'Tip Calculator Guide',
+    desc: 'See how tips and splits are calculated.'
+  },
+  {
+    href: '/business-days',
+    title: 'Business Days Guide',
+    desc: 'Learn how workdays are counted.'
   }
 ];
 
