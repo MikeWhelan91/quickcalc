@@ -16,7 +16,9 @@ export const metadata: Metadata = {
     "age calculator",
     "tip calculator",
     "date difference calculator",
-    "business days calculator"
+    "business days calculator",
+    "calculator guides",
+    "calculator faq"
   ],
   alternates: { canonical: canonical('/') },
   openGraph: {
@@ -125,6 +127,24 @@ export default function Home() {
 
           </Link>
         ))}
+      </section>
+      <section className="card" style={{ marginTop: 40 }}>
+        <h2>About QuickCalc</h2>
+        <p>
+          QuickCalc offers a growing collection of free online calculators designed for everyday use.
+          Each tool runs instantly in your browser, prioritizing privacy with no sign‑ups or data storage.
+        </p>
+        <p>
+          Looking to understand the math behind the numbers? Browse our
+          {" "}
+          <Link href="/guides" className="fancy-link">calculator guides</Link>
+          {" "}
+          or check the
+          {" "}
+          <Link href="/faq" className="fancy-link">FAQ</Link>
+          {" "}
+          for quick answers.
+        </p>
       </section>
     </>
   );

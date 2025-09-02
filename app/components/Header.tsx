@@ -13,7 +13,9 @@ const nav = [
   { href: "/date-diff", label: "Date Diff" },
   { href: "/tip", label: "Tip" },
   { href: "/business-days", label: "Business Days" },
-  { href: "/compound-interest", label: "Compound" }
+  { href: "/compound-interest", label: "Compound" },
+  { href: "/guides", label: "Guides" },
+  { href: "/faq", label: "FAQ" }
 ];
 
 export default function Header(){
