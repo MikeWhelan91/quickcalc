@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import BizDaysClient from './BizDaysClient';
+import BizDaysGuide from './BizDaysGuide';
 import { canonical } from '@/lib/seo';
 
 export default function Page() {
@@ -17,6 +18,7 @@ export default function Page() {
         {JSON.stringify(jsonLd)}
       </Script>
       <BizDaysClient />
+      <BizDaysGuide />
     </>
   );
 }
