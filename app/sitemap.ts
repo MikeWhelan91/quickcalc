@@ -11,7 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/date-diff",
     "/tip",
     "/business-days",
-    "/compound-interest"
+    "/compound-interest",
+    "/guides",
+    "/faq"
   ];
   return routes.map((r) => ({
     url: `${base}${r}`,

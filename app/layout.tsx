@@ -20,7 +20,9 @@ export const metadata: Metadata = {
     "age calculator",
     "tip calculator",
     "date difference",
-    "business days calculator"
+    "business days calculator",
+    "calculator guides",
+    "calculator faq"
   ],
   metadataBase: new URL(baseUrl),
   robots: { index: true, follow: true },
