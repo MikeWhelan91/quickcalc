@@ -1,2 +1,2 @@
-import { differenceInDays, addMonths } from "date-fns";
-export { differenceInDays, addMonths };
+import { differenceInDays, differenceInWeeks, addMonths } from "date-fns";
+export { differenceInDays, differenceInWeeks, addMonths };

@@ -1,0 +1,99 @@
+.biz-result {
+  display: grid;
+  gap: 16px;
+}
+
+.biz-kpis {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.biz-card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: color-mix(in oklab,var(--primary) 10%, var(--card));
+  border: 1px solid color-mix(in oklab,var(--primary) 20%, var(--border));
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.biz-card .label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.biz-card strong {
+  font-size: 1.4rem;
+  color: var(--navy);
+}
+
+.biz-bar {
+  display: flex;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab,var(--primary) 16%, var(--border));
+  height: 14px;
+}
+
+.biz-bar .segment {
+  height: 100%;
+}
+
+.biz-bar .segment.weekend {
+  background: linear-gradient(90deg, rgba(15,31,58,.15), rgba(15,31,58,.25));
+}
+
+.biz-bar .segment.holiday {
+  background: linear-gradient(90deg, rgba(246,163,19,0.4), rgba(246,163,19,0.6));
+}
+
+.biz-bar .segment.work {
+  background: linear-gradient(90deg, rgba(34,197,94,0.6), rgba(34,197,94,0.9));
+}
+
+.biz-legend {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: 0;
+}
+
+.biz-legend div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.biz-legend dt {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.biz-legend dd {
+  margin: 0 0 0 auto;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-flex;
+}
+
+.dot.weekend {
+  background: rgba(15,31,58,0.35);
+}
+
+.dot.holiday {
+  background: var(--accent);
+}
+
+.dot.work {
+  background: #22c55e;
+}

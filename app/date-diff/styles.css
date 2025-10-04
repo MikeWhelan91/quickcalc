@@ -1,0 +1,78 @@
+.date-result {
+  display: grid;
+  gap: 18px;
+}
+
+.date-cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+
+.date-card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: color-mix(in oklab,var(--primary) 12%, var(--card));
+  border: 1px solid color-mix(in oklab,var(--primary) 20%, var(--border));
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.date-card .label,
+.date-grid .label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.date-card strong,
+.date-grid strong {
+  font-size: 1.3rem;
+  color: var(--navy);
+}
+
+.date-timeline {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.date-timeline .track {
+  position: relative;
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(15,31,58,0.12);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.date-timeline .fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  opacity: 0.8;
+}
+
+.date-timeline .days {
+  position: relative;
+  z-index: 1;
+}
+
+.date-timeline .stamp {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.date-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}

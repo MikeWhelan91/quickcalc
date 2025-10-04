@@ -1,0 +1,68 @@
+.loan-result {
+  display: grid;
+  gap: 18px;
+}
+
+.loan-kpis {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.loan-card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: color-mix(in oklab,var(--primary) 12%, var(--card));
+  border: 1px solid color-mix(in oklab,var(--primary) 22%, var(--border));
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.loan-card .label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.loan-card strong {
+  font-size: 1.4rem;
+  color: var(--navy);
+}
+
+.loan-ring {
+  display: flex;
+  justify-content: center;
+}
+
+.loan-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.bar {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  border-radius: 999px;
+  height: 12px;
+  background: rgba(15,31,58,0.08);
+}
+
+.bar .principal {
+  background: #22c55e;
+}
+
+.bar .interest {
+  background: var(--accent);
+}

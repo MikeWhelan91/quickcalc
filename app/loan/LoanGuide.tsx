@@ -18,6 +18,10 @@ export default function LoanGuide() {
         Understanding amortization helps you compare loans and budget effectively by showing how much
         interest you’ll pay over the life of the loan.
       </p>
+      <p>
+        The visual bars in the calculator highlight the principal and interest mix for the first
+        year so you can see how quickly the balance starts to fall.
+      </p>
       <p className="small">
         Source:{' '}
         <a

@@ -19,6 +19,10 @@ export default function CompoundGuide() {
         Adding a fixed contribution each period accelerates growth and can significantly increase the
         future value of your investment.
       </p>
+      <p>
+        The calculator plots both the projected balance and cumulative contributions, making it easy
+        to see when compound interest begins to outpace the money you put in.
+      </p>
       <p className="small">
         Source:{' '}
         <a href="https://en.wikipedia.org/wiki/Compound_interest" target="_blank" rel="noopener">

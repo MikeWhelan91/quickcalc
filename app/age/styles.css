@@ -1,0 +1,103 @@
+.age-result {
+  display: grid;
+  gap: 18px;
+}
+
+.age-dial {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.age-dial svg {
+  max-width: 240px;
+}
+
+.age-dial-label {
+  position: absolute;
+  text-align: center;
+  color: var(--navy);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 1rem;
+}
+
+.age-dial-label strong {
+  font-size: 1.35rem;
+}
+
+.age-metrics {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.metric-card {
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--card) 85%, var(--primary) 15%);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+}
+
+.metric-card.highlight {
+  background: linear-gradient(135deg, color-mix(in oklab,var(--accent) 60%, var(--card)), var(--card));
+}
+
+.metric-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.metric-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.age-timeline {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  background: color-mix(in oklab,var(--primary) 8%, var(--card));
+  border: 1px solid color-mix(in oklab,var(--primary) 18%, var(--border));
+}
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.timeline-bar {
+  position: relative;
+  height: 8px;
+  background: rgba(15,31,58,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.timeline-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+
+@media (max-width: 640px) {
+  .age-dial svg {
+    max-width: 200px;
+  }
+}

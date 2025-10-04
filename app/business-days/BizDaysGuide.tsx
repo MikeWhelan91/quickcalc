@@ -13,6 +13,11 @@ export default function BizDaysGuide() {
         List every day in the range, exclude Saturdays, Sundays and any holidays, then count the
         remaining days.
       </p>
+      <p>
+        The visual breakdown in the calculator mirrors this process by separating weekends,
+        public holidays and true business days so you can immediately see which parts of the
+        timeline remove working time.
+      </p>
       <h3 style={{ marginTop: 24 }}>Why it matters</h3>
       <p>
         Business day counts are vital for project timelines, shipping estimates and legal notice

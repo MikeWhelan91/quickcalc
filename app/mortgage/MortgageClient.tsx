@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import CalcShell from "../components/CalcShell";
 import Tooltip from "../components/Tooltip";
 import { schemas, CountryCode } from "@/lib/mortgage";
+import "./styles.css";
 
 const symbolMap: Record<string, string> = {
   USD: "$",
@@ -13,6 +14,9 @@ const symbolMap: Record<string, string> = {
   AUD: "$",
   INR: "₹",
 };
+
+const RING_RADIUS = 88;
+const RING_CIRC = 2 * Math.PI * RING_RADIUS;
 
 export default function MortgageClient() {
   const countries = Object.keys(schemas) as CountryCode[];
@@ -66,6 +70,17 @@ export default function MortgageClient() {
 
   const calc = useMemo(() => schema.calculate(values), [schema, values]);
   const formatter = useMemo(() => new Intl.NumberFormat(schema.locale, { style: "currency", currency }), [schema.locale, currency]);
+  const breakdown = useMemo(() => {
+    const monthly = calc.monthlyTotal || 0;
+    const paymentShare = monthly > 0 ? calc.payment / monthly : 0;
+    const extrasShare = monthly > 0 ? calc.extras / monthly : 0;
+    return {
+      paymentShare,
+      extrasShare,
+      extras: calc.extras,
+      payment: calc.payment
+    };
+  }, [calc]);
 
   function renderFields(group: keyof typeof schema.fields, title: string) {
     return (
@@ -112,20 +127,79 @@ export default function MortgageClient() {
       title="Mortgage Calculator"
       subtitle="Country-aware home loan estimates with taxes, insurance and fees."
       result={
-        <>
-          <div className="kpi"><span>Monthly ({currency})</span><span>{formatter.format(calc.monthlyTotal)}</span></div>
-          <div style={{ height: 10 }} />
-          <div className="kpi"><span>Total interest</span><span>{formatter.format(calc.interest)}</span></div>
-          <div style={{ height: 10 }} />
-          <div className="kpi"><span>Total paid</span><span>{formatter.format(calc.total)}</span></div>
+        <div className="mortgage-result">
+          <div className="mortgage-kpis">
+            <div className="mortgage-card">
+              <span className="label">Monthly ({currency})</span>
+              <strong>{formatter.format(calc.monthlyTotal)}</strong>
+            </div>
+            <div className="mortgage-card">
+              <span className="label">Total interest</span>
+              <strong>{formatter.format(calc.interest)}</strong>
+            </div>
+            <div className="mortgage-card">
+              <span className="label">Total paid</span>
+              <strong>{formatter.format(calc.total)}</strong>
+            </div>
+          </div>
+          <div className="mortgage-breakdown">
+            <svg width="220" height="220" viewBox="0 0 220 220" role="presentation" aria-hidden="true">
+              <defs>
+                <linearGradient id="mortgagePrincipal" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="var(--accent)" />
+                  <stop offset="100%" stopColor="var(--primary)" />
+                </linearGradient>
+              </defs>
+              <circle cx="110" cy="110" r={RING_RADIUS} stroke="rgba(15,31,58,0.08)" strokeWidth="26" fill="none" />
+              <circle
+                cx="110"
+                cy="110"
+                r={RING_RADIUS}
+                stroke="url(#mortgagePrincipal)"
+                strokeWidth="26"
+                strokeDasharray={`${breakdown.paymentShare * RING_CIRC} ${(1 - breakdown.paymentShare) * RING_CIRC}`}
+                strokeLinecap="butt"
+                fill="none"
+                transform="rotate(-90 110 110)"
+              />
+              <circle
+                cx="110"
+                cy="110"
+                r={RING_RADIUS}
+                stroke="color-mix(in oklab,var(--primary) 65%, var(--accent))"
+                strokeWidth="26"
+                strokeDasharray={`${breakdown.extrasShare * RING_CIRC} ${(1 - breakdown.extrasShare) * RING_CIRC}`}
+                strokeDashoffset={-breakdown.paymentShare * RING_CIRC}
+                strokeLinecap="butt"
+                fill="none"
+                transform="rotate(-90 110 110)"
+              />
+              <circle
+                cx="110"
+                cy="110"
+                r="64"
+                fill="color-mix(in oklab,var(--primary) 8%, var(--card))"
+              />
+              <text x="110" y="102" textAnchor="middle" fontSize="18" fontWeight="700" fill="var(--navy)">
+                {formatter.format(calc.monthlyTotal)}
+              </text>
+              <text x="110" y="122" textAnchor="middle" fontSize="12" fill="var(--muted)">
+                monthly cost
+              </text>
+            </svg>
+            <dl className="mortgage-legend">
+              <div><span className="dot principal" /> <dt>Principal & interest</dt><dd>{formatter.format(breakdown.payment)}</dd></div>
+              <div><span className="dot extras" /> <dt>Taxes & fees</dt><dd>{formatter.format(breakdown.extras)}</dd></div>
+            </dl>
+          </div>
           {calc.upfront > 0 && (
-            <>
-              <div style={{ height: 10 }} />
-              <div className="kpi"><span>Upfront costs</span><span>{formatter.format(calc.upfront)}</span></div>
-            </>
+            <div className="mortgage-upfront">
+              <span className="label">Upfront costs</span>
+              <strong>{formatter.format(calc.upfront)}</strong>
+            </div>
           )}
           <p className="small">Estimates only. Taxes and fees are approximations.</p>
-        </>
+        </div>
       }
     >
       <div className="grid grid-2">

@@ -6,12 +6,12 @@ import { canonical } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Compound Interest Calculator — Investment Growth Over Time',
-  description: 'Calculate compound interest with optional periodic contributions to see how savings grow.',
+  description: 'Calculate compound interest with optional periodic contributions and visual growth charts for your savings.',
   keywords: ['compound interest calculator','investment calculator','savings growth','future value','interest compounding'],
   alternates: { canonical: canonical('/compound-interest') },
   openGraph: {
     title: 'Compound Interest Calculator — Investment Growth Over Time',
-    description: 'Calculate compound interest with optional periodic contributions to see how savings grow.',
+    description: 'Calculate compound interest with optional periodic contributions and visual growth charts for your savings.',
     url: canonical('/compound-interest'),
     images: [
       {
