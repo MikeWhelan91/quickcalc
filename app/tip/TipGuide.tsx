@@ -13,6 +13,11 @@ export default function TipGuide() {
         <code>{"Tip = bill \u00d7 (percentage / 100)"}</code>. The total per person is the bill plus
         tip divided by the number of people.
       </p>
+      <p>
+        The circular share dial in the calculator visualises how much of the final bill is tip.
+        Adjusting the percentage updates the dial instantly so you can see whether you are tipping
+        below or above common norms.
+      </p>
       <h3 style={{ marginTop: 24 }}>Why it matters</h3>
       <p>
         Quickly calculating fair tips helps avoid awkward math at the table and ensures staff

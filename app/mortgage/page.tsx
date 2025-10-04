@@ -6,12 +6,12 @@ import { canonical } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Mortgage Calculator — Country-Specific Home Loan Estimates',
-  description: 'Country-aware mortgage calculator for the US, Canada, UK, Australia, Europe and India with taxes, insurance, fees, upfront costs and a comprehensive mortgage FAQ.',
+  description: 'Country-aware mortgage calculator for the US, Canada, UK, Australia, Europe and India with visual monthly breakdowns, taxes, insurance, fees and upfront costs.',
   keywords: ['mortgage calculator', 'home loan', 'amortization', 'down payment', 'property tax', 'home insurance', 'HOA fees', 'strata fees', 'body corporate fees', 'condo fees', 'ground rent', 'stamp duty', 'CMHC insurance', 'LMI', 'notary fees', 'processing fee', 'mortgage faq', 'home loan faq', 'mortgage questions', 'US', 'Canada', 'UK', 'Australia', 'India', 'Europe'],
   alternates: { canonical: canonical('/mortgage') },
   openGraph: {
     title: 'Mortgage Calculator — Country-Specific Home Loan Estimates',
-    description: 'Country-aware mortgage calculator for the US, Canada, UK, Australia, Europe and India with taxes, insurance, fees, upfront costs and a comprehensive mortgage FAQ.',
+    description: 'Country-aware mortgage calculator for the US, Canada, UK, Australia, Europe and India with visual monthly breakdowns, taxes, insurance, fees and upfront costs.',
     url: canonical('/mortgage'),
     images: [{ url: '/images/mortgage.jpg', width: 1200, height: 630, alt: 'Mortgage calculator' }]
   }

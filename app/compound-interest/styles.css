@@ -1,0 +1,64 @@
+.compound-result {
+  display: grid;
+  gap: 18px;
+}
+
+.compound-kpis {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.compound-card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: color-mix(in oklab,var(--primary) 12%, var(--card));
+  border: 1px solid color-mix(in oklab,var(--primary) 22%, var(--border));
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.compound-card .label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.compound-card strong {
+  font-size: 1.35rem;
+  color: var(--navy);
+}
+
+.compound-chart {
+  width: 100%;
+  background: color-mix(in oklab,var(--primary) 4%, var(--card));
+  border-radius: 20px;
+  border: 1px solid color-mix(in oklab,var(--primary) 18%, var(--border));
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.compound-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.compound-legend .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-flex;
+}
+
+.compound-legend .dot.growth {
+  background: var(--accent);
+}
+
+.compound-legend .dot.contrib {
+  background: rgba(15,31,58,0.35);
+}

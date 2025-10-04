@@ -1,0 +1,95 @@
+.mortgage-result {
+  display: grid;
+  gap: 18px;
+}
+
+.mortgage-kpis {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.mortgage-card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: color-mix(in oklab,var(--primary) 12%, var(--card));
+  border: 1px solid color-mix(in oklab,var(--primary) 22%, var(--border));
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mortgage-card .label,
+.mortgage-upfront .label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.mortgage-card strong,
+.mortgage-upfront strong {
+  font-size: 1.35rem;
+  color: var(--navy);
+}
+
+.mortgage-breakdown {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+}
+
+.mortgage-legend {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin: 0;
+}
+
+.mortgage-legend div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mortgage-legend dt {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.mortgage-legend dd {
+  margin: 0 0 0 auto;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-flex;
+}
+
+.dot.principal {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.dot.extras {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: color-mix(in oklab,var(--primary) 60%, var(--accent));
+}
+
+.mortgage-upfront {
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: color-mix(in oklab,var(--primary) 6%, var(--card));
+  border: 1px solid color-mix(in oklab,var(--primary) 18%, var(--border));
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

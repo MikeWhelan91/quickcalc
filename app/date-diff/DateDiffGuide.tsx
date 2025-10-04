@@ -13,6 +13,11 @@ export default function DateDiffGuide() {
         Count the number of days between the dates and divide as needed: 7 days per week and
         365 days per year (taking leap years into account).
       </p>
+      <p>
+        The gradient bar in the calculator highlights how much of a single calendar year the span
+        represents. Longer periods cap at one year so you can instantly compare shorter and longer
+        ranges visually.
+      </p>
       <h3 style={{ marginTop: 24 }}>Why it matters</h3>
       <p>
         Knowing exact gaps between dates is useful for project planning, age tracking and

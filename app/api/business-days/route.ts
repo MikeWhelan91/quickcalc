@@ -16,13 +16,29 @@ export async function GET(req: Request) {
   const holidays = await r.json();
   const set = new Set(holidays.map((h: any) => h.date));
 
-  let d = new Date(start); let businessDays = 0;
+  let d = new Date(start);
+  let businessDays = 0;
+  let weekendDays = 0;
+  let holidayDays = 0;
+  let calendarDays = 0;
+
   while (d <= end) {
-    const day = d.getDay(); // 0 Sun .. 6 Sat
+    calendarDays += 1;
+    const day = d.getDay();
     const iso = d.toISOString().slice(0,10);
-    if (day !== 0 && day !== 6 && !set.has(iso)) businessDays++;
+    const isWeekend = day === 0 || day === 6;
+    if (isWeekend) {
+      weekendDays += 1;
+    } else if (set.has(iso)) {
+      holidayDays += 1;
+    } else {
+      businessDays += 1;
+    }
     d.setDate(d.getDate() + 1);
   }
 
-  return NextResponse.json({ businessDays }, { headers: { "Cache-Control": "public, s-maxage=86400" } });
+  return NextResponse.json(
+    { businessDays, weekendDays, holidayDays, calendarDays },
+    { headers: { "Cache-Control": "public, s-maxage=86400" } }
+  );
 }
