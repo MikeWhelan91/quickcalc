@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import CalcShell from "../components/CalcShell";
+import { clampNumberInput } from "@/lib/numbers";
 import "./styles.css";
 
 const SIZE = 180;
@@ -15,15 +16,34 @@ function createDash(percent: number) {
 }
 
 export default function TipClient(){
-  const [bill, setBill] = useState(80);
-  const [tip, setTip] = useState(12.5);
-  const [people, setPeople] = useState(2);
+  const [billInput, setBillInput] = useState("80");
+  const [tipInput, setTipInput] = useState("12.5");
+  const [peopleInput, setPeopleInput] = useState("2");
+
+  const bill = useMemo(() => clampNumberInput(billInput, { min: 0, fallback: 0 }), [billInput]);
+  const tip = useMemo(() => clampNumberInput(tipInput, { min: 0, fallback: 0 }), [tipInput]);
+  const people = useMemo(() => clampNumberInput(peopleInput, { min: 1, fallback: 1 }), [peopleInput]);
 
   const tipAmt = useMemo(()=> +(bill * tip / 100).toFixed(2), [bill, tip]);
   const total = useMemo(()=> +(bill + tipAmt).toFixed(2), [bill, tipAmt]);
   const per = useMemo(()=> people > 0 ? +(total / people).toFixed(2) : 0, [total, people]);
   const perTip = useMemo(()=> people > 0 ? +(tipAmt / people).toFixed(2) : 0, [tipAmt, people]);
   const basePer = useMemo(()=> people > 0 ? +((bill) / people).toFixed(2) : 0, [bill, people]);
+
+  const handleBillBlur = () => {
+    if (!billInput.trim()) return;
+    setBillInput(`${bill}`);
+  };
+
+  const handleTipBlur = () => {
+    if (!tipInput.trim()) return;
+    setTipInput(`${tip}`);
+  };
+
+  const handlePeopleBlur = () => {
+    if (!peopleInput.trim()) return;
+    setPeopleInput(`${people}`);
+  };
 
   const tipShare = total > 0 ? tipAmt / total : 0;
 
@@ -76,9 +96,9 @@ export default function TipClient(){
       </div>
     }>
       <div className="grid grid-2">
-        <div><label>Bill (€)</label><input className="input" type="number" step="0.01" value={bill} onChange={e=>setBill(Math.max(0, +e.target.value || 0))} /></div>
-        <div><label>Tip (%)</label><input className="input" type="number" step="0.1" value={tip} onChange={e=>setTip(Math.max(0, +e.target.value || 0))} /></div>
-        <div><label>People</label><input className="input" type="number" min={1} step={1} value={people} onChange={e=>setPeople(Math.max(1, +e.target.value || 1))} /></div>
+        <div><label>Bill (€)</label><input className="input" type="number" step="0.01" value={billInput} onChange={e=>setBillInput(e.target.value)} onBlur={handleBillBlur} /></div>
+        <div><label>Tip (%)</label><input className="input" type="number" step="0.1" value={tipInput} onChange={e=>setTipInput(e.target.value)} onBlur={handleTipBlur} /></div>
+        <div><label>People</label><input className="input" type="number" min={1} step={1} value={peopleInput} onChange={e=>setPeopleInput(e.target.value)} onBlur={handlePeopleBlur} /></div>
       </div>
     </CalcShell>
   );

@@ -1,6 +1,7 @@
 'use client';
 import { useMemo, useState } from 'react';
 import CalcShell from '../components/CalcShell';
+import { clampNumberInput } from '@/lib/numbers';
 import './styles.css';
 
 type GrowthPoint = { year: number; balance: number; contributions: number };
@@ -17,11 +18,17 @@ function compoundBalance(principal: number, rate: number, times: number, years: 
 }
 
 export default function CompoundClient() {
-  const [principal, setPrincipal] = useState(10000);
-  const [rate, setRate] = useState(5);
-  const [times, setTimes] = useState(12);
-  const [years, setYears] = useState(10);
-  const [contrib, setContrib] = useState(0);
+  const [principalInput, setPrincipalInput] = useState('10000');
+  const [rateInput, setRateInput] = useState('5');
+  const [timesInput, setTimesInput] = useState('12');
+  const [yearsInput, setYearsInput] = useState('10');
+  const [contribInput, setContribInput] = useState('0');
+
+  const principal = useMemo(() => clampNumberInput(principalInput, { min: 0, fallback: 0 }), [principalInput]);
+  const rate = useMemo(() => clampNumberInput(rateInput, { min: 0, fallback: 0 }), [rateInput]);
+  const times = useMemo(() => clampNumberInput(timesInput, { min: 1, fallback: 1 }), [timesInput]);
+  const years = useMemo(() => clampNumberInput(yearsInput, { min: 1, fallback: 1 }), [yearsInput]);
+  const contrib = useMemo(() => clampNumberInput(contribInput, { min: 0, fallback: 0 }), [contribInput]);
 
   const amount = useMemo(() => {
     return +compoundBalance(principal, rate, times, years, contrib).toFixed(2);
@@ -29,6 +36,31 @@ export default function CompoundClient() {
 
   const contributed = useMemo(() => principal + contrib * times * years, [principal, contrib, times, years]);
   const interest = useMemo(() => +(amount - contributed).toFixed(2), [amount, contributed]);
+
+  const handlePrincipalBlur = () => {
+    if (!principalInput.trim()) return;
+    setPrincipalInput(`${principal}`);
+  };
+
+  const handleRateBlur = () => {
+    if (!rateInput.trim()) return;
+    setRateInput(`${rate}`);
+  };
+
+  const handleTimesBlur = () => {
+    if (!timesInput.trim()) return;
+    setTimesInput(`${times}`);
+  };
+
+  const handleYearsBlur = () => {
+    if (!yearsInput.trim()) return;
+    setYearsInput(`${years}`);
+  };
+
+  const handleContribBlur = () => {
+    if (!contribInput.trim()) return;
+    setContribInput(`${contrib}`);
+  };
 
   const growth = useMemo<GrowthPoint[]>(() => {
     const points: GrowthPoint[] = [];
@@ -112,24 +144,24 @@ export default function CompoundClient() {
       <div className="grid grid-2">
         <div>
           <label>Principal ($)</label>
-          <input className="input" type="number" value={principal} onChange={e => setPrincipal(Math.max(0, +e.target.value || 0))} />
+          <input className="input" type="number" value={principalInput} onChange={e => setPrincipalInput(e.target.value)} onBlur={handlePrincipalBlur} />
         </div>
         <div>
           <label>Rate (% per year)</label>
-          <input className="input" type="number" step="0.01" value={rate} onChange={e => setRate(Math.max(0, +e.target.value || 0))} />
+          <input className="input" type="number" step="0.01" value={rateInput} onChange={e => setRateInput(e.target.value)} onBlur={handleRateBlur} />
         </div>
         <div>
           <label>Compounds / year</label>
-          <input className="input" type="number" value={times} onChange={e => setTimes(Math.max(1, +e.target.value || 1))} />
+          <input className="input" type="number" value={timesInput} onChange={e => setTimesInput(e.target.value)} onBlur={handleTimesBlur} />
         </div>
         <div>
           <label>Years</label>
-          <input className="input" type="number" value={years} onChange={e => setYears(Math.max(1, +e.target.value || 1))} />
+          <input className="input" type="number" value={yearsInput} onChange={e => setYearsInput(e.target.value)} onBlur={handleYearsBlur} />
         </div>
         <div style={{ gridColumn: '1 / -1' }}>
           <label>Contribution per period ($)</label>
-          <input className="input" type="number" value={contrib} onChange={e => setContrib(Math.max(0, +e.target.value || 0))} />
-        </div>
+          <input className="input" type="number" value={contribInput} onChange={e => setContribInput(e.target.value)} onBlur={handleContribBlur} />
+      </div>
       </div>
     </CalcShell>
   );
