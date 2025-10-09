@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import CalcShell from "../components/CalcShell";
 import Tooltip from "../components/Tooltip";
 import { schemas, CountryCode } from "@/lib/mortgage";
+import { clampNumberInput, clampNumberValue } from "@/lib/numbers";
 import "./styles.css";
 
 const symbolMap: Record<string, string> = {
@@ -25,16 +26,20 @@ export default function MortgageClient() {
   const [country, setCountry] = useState<CountryCode>("US");
   const schema = schemas[country];
   const [currency, setCurrency] = useState(schema.currency);
-  const defaultValues = (() => {
+  const defaultValues = useMemo(() => {
     const d: Record<string, number> = {};
-    ["basics", "recurring", "upfront"].forEach(group => {
-      schema.fields[group as keyof typeof schema.fields].forEach(f => {
+    (["basics", "recurring", "upfront"] as const).forEach(group => {
+      schema.fields[group].forEach(f => {
         d[f.id] = f.default;
       });
     });
     return d;
-  })();
-  const [values, setValues] = useState<Record<string, number>>(defaultValues);
+  }, [schema]);
+  const defaultRawValues = useMemo(() => {
+    return Object.fromEntries(Object.entries(defaultValues).map(([key, value]) => [key, `${value}`]));
+  }, [defaultValues]);
+  const [values, setValues] = useState<Record<string, number>>(() => ({ ...defaultValues }));
+  const [rawValues, setRawValues] = useState<Record<string, string>>(() => ({ ...defaultRawValues }));
 
   // initialise country from query/localStorage
   useEffect(() => {
@@ -50,12 +55,13 @@ export default function MortgageClient() {
     const s = schemas[country];
     setCurrency(s.currency);
     const defaults: Record<string, number> = {};
-    ["basics", "recurring", "upfront"].forEach(group => {
-      s.fields[group as keyof typeof s.fields].forEach(f => {
+    (["basics", "recurring", "upfront"] as const).forEach(group => {
+      s.fields[group].forEach(f => {
         defaults[f.id] = f.default;
       });
     });
-    setValues(defaults);
+    setValues({ ...defaults });
+    setRawValues(Object.fromEntries(Object.entries(defaults).map(([key, value]) => [key, `${value}`])));
     if (typeof window !== "undefined") {
       localStorage.setItem("mortgageCountry", country);
       const params = new URLSearchParams(window.location.search);
@@ -64,11 +70,32 @@ export default function MortgageClient() {
     }
   }, [country, router]);
 
-  const update = (id: string, value: number) => {
-    setValues(v => ({ ...v, [id]: value }));
+  const handleFieldChange = (id: string, raw: string) => {
+    setRawValues(v => ({ ...v, [id]: raw }));
+    setValues(v => ({ ...v, [id]: raw === "" ? Number.NaN : Number(raw) }));
   };
 
-  const calc = useMemo(() => schema.calculate(values), [schema, values]);
+  const handleFieldBlur = (id: string) => {
+    const current = rawValues[id] ?? "";
+    if (!current.trim()) return;
+    const min = id === "term" ? 1 : 0;
+    const sanitized = clampNumberInput(current, { min, fallback: min ?? 0 });
+    setRawValues(v => ({ ...v, [id]: `${sanitized}` }));
+    setValues(v => ({ ...v, [id]: sanitized }));
+  };
+
+  const safeValues = useMemo(() => {
+    const cleaned: Record<string, number> = {};
+    (["basics", "recurring", "upfront"] as const).forEach(group => {
+      schema.fields[group].forEach(field => {
+        const min = field.id === "term" ? 1 : 0;
+        cleaned[field.id] = clampNumberValue(values[field.id], { min, fallback: min ?? 0 });
+      });
+    });
+    return cleaned;
+  }, [schema, values]);
+
+  const calc = useMemo(() => schema.calculate(safeValues), [schema, safeValues]);
   const formatter = useMemo(() => new Intl.NumberFormat(schema.locale, { style: "currency", currency }), [schema.locale, currency]);
   const breakdown = useMemo(() => {
     const monthly = calc.monthlyTotal || 0;
@@ -110,8 +137,9 @@ export default function MortgageClient() {
                   className="input"
                   type="number"
                   step={f.step || 1}
-                  value={values[f.id] ?? ''}
-                  onChange={e => update(f.id, +e.target.value)}
+                  value={rawValues[f.id] ?? ''}
+                  onChange={e => handleFieldChange(f.id, e.target.value)}
+                  onBlur={() => handleFieldBlur(f.id)}
                   {...(f.tooltip ? { title: f.tooltip } : {})}
                 />
               </div>

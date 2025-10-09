@@ -2,6 +2,7 @@
 import { useMemo, useState } from "react";
 import CalcShell from "../components/CalcShell";
 import { amortizedPayment } from "@/lib/finance";
+import { clampNumberInput } from "@/lib/numbers";
 import "./styles.css";
 
 interface ScheduleRow {
@@ -30,13 +31,32 @@ function buildSchedule(amount: number, rate: number, months: number): ScheduleRo
 }
 
 export default function LoanClient(){
-  const [amount, setAmount] = useState(15000);
-  const [rate, setRate] = useState(7.9);
-  const [months, setMonths] = useState(48);
+  const [amountInput, setAmountInput] = useState("15000");
+  const [rateInput, setRateInput] = useState("7.9");
+  const [monthsInput, setMonthsInput] = useState("48");
+
+  const amount = useMemo(() => clampNumberInput(amountInput, { min: 0, fallback: 0 }), [amountInput]);
+  const rate = useMemo(() => clampNumberInput(rateInput, { min: 0, fallback: 0 }), [rateInput]);
+  const months = useMemo(() => clampNumberInput(monthsInput, { min: 1, fallback: 1 }), [monthsInput]);
 
   const payment = useMemo(()=> amortizedPayment(amount, rate, months), [amount, rate, months]);
   const total = useMemo(()=> payment * months, [payment, months]);
   const interest = useMemo(()=> total - amount, [total, amount]);
+
+  const handleAmountBlur = () => {
+    if (!amountInput.trim()) return;
+    setAmountInput(`${amount}`);
+  };
+
+  const handleRateBlur = () => {
+    if (!rateInput.trim()) return;
+    setRateInput(`${rate}`);
+  };
+
+  const handleMonthsBlur = () => {
+    if (!monthsInput.trim()) return;
+    setMonthsInput(`${months}`);
+  };
 
   const schedule = useMemo(() => buildSchedule(amount, rate, months), [amount, rate, months]);
   const interestShare = total > 0 ? interest / total : 0;
@@ -109,9 +129,9 @@ export default function LoanClient(){
       </div>
     }>
       <div className="grid grid-2">
-        <div><label>Loan amount (€)</label><input className="input" type="number" value={amount} onChange={e=>setAmount(Math.max(0, +e.target.value || 0))} /></div>
-        <div><label>Interest rate (% p.a.)</label><input className="input" type="number" step="0.01" value={rate} onChange={e=>setRate(Math.max(0, +e.target.value || 0))} /></div>
-        <div><label>Term (months)</label><input className="input" type="number" min={1} step={1} value={months} onChange={e=>setMonths(Math.max(1, +e.target.value || 1))} /></div>
+        <div><label>Loan amount (€)</label><input className="input" type="number" value={amountInput} onChange={e=>setAmountInput(e.target.value)} onBlur={handleAmountBlur} /></div>
+        <div><label>Interest rate (% p.a.)</label><input className="input" type="number" step="0.01" value={rateInput} onChange={e=>setRateInput(e.target.value)} onBlur={handleRateBlur} /></div>
+        <div><label>Term (months)</label><input className="input" type="number" min={1} step={1} value={monthsInput} onChange={e=>setMonthsInput(e.target.value)} onBlur={handleMonthsBlur} /></div>
       </div>
     </CalcShell>
   );
