@@ -12,8 +12,8 @@
 .mortgage-card {
   border-radius: 14px;
   padding: 14px 16px;
-  background: color-mix(in oklab,var(--primary) 12%, var(--card));
-  border: 1px solid color-mix(in oklab,var(--primary) 22%, var(--border));
+  background: #eef2ff;
+  border: 1px solid color-mix(in oklab,var(--primary) 20%, var(--border));
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -87,8 +87,8 @@
 .mortgage-upfront {
   border-radius: 14px;
   padding: 14px 16px;
-  background: color-mix(in oklab,var(--primary) 6%, var(--card));
-  border: 1px solid color-mix(in oklab,var(--primary) 18%, var(--border));
+  background: #f8f9ff;
+  border: 1px solid color-mix(in oklab,var(--primary) 15%, var(--border));
   display: flex;
   flex-direction: column;
   gap: 6px;

@@ -1,39 +1,51 @@
-import React from 'react';
-
 export default function AgeGuide() {
   return (
-    <section className="card" style={{ marginTop: 24 }}>
-      <h2>How the Age Calculator Works</h2>
-      <p>
-        The age calculator determines your exact chronological age by finding the time between your
-        date of birth and the current date. It breaks the span into years, months and days for
-        precise results.
-      </p>
-      <h3 style={{ marginTop: 24 }}>Manual calculation</h3>
-      <p>
-        To compute age by hand, subtract the birth date from today’s date. If the current month and
-        day precede your birthday, borrow months and days to adjust the difference.
-      </p>
-      <p>
-        The live countdown in the calculator uses the next occurrence of your birth date to show the
-        remaining days until you celebrate again. We assume a global life expectancy of 82 years to
-        visualise the dial—this can be compared against your own goals or national averages.
-      </p>
-      <h3 style={{ marginTop: 24 }}>Why knowing your age matters</h3>
-      <p>
-        Exact age is often required for legal documents, health screenings and milestone planning
-        such as retirement or educational enrollment.
-      </p>
-      <p className="small">
-        Source:{' '}
-        <a
-          href="https://en.wikipedia.org/wiki/Chronological_age"
-          target="_blank"
-          rel="noopener"
-        >
-          Wikipedia
-        </a>
-      </p>
+    <section className="detail-section">
+      <div className="card detail-hero">
+        <p className="eyebrow">Guide</p>
+        <h2>How the Age Calculator Works</h2>
+        <p>
+          The calculator measures the exact time between your date of birth and the current moment, then breaks that
+          span into years, months and days. It also locates your next birthday and plots life expectancy progress so
+          you can see where you stand.
+        </p>
+        <ul className="detail-list">
+          <li>Accurate chronological age based on calendar math.</li>
+          <li>Countdown to the next birthday and milestone years.</li>
+          <li>Life expectancy dial to visualise long-term progress.</li>
+        </ul>
+      </div>
+      <div className="detail-grid">
+        <article className="card info-card">
+          <h3>Manual calculation</h3>
+          <p>
+            Subtract the birth date from today. If the current month/day is before your birthday, borrow a month and the
+            matching number of days from the previous month to keep the values positive. That yields the familiar Y/M/D
+            breakdown we show in the UI.
+          </p>
+        </article>
+        <article className="card info-card">
+          <h3>Milestones & countdowns</h3>
+          <p>
+            We compute the next birthday and milestones like 40 and 65 by adding fixed year offsets to your birth date.
+            The progress bars compare days lived to the days required to reach each milestone, giving a quick glance at
+            how close you are.
+          </p>
+        </article>
+        <article className="card info-card">
+          <h3>Why it matters</h3>
+          <p>
+            Precise age is required for passports, medical screenings, benefits eligibility and planning for retirement
+            or schooling. Seeing the countdown encourages proactive planning rather than reacting when deadlines appear.
+          </p>
+          <p className="small">
+            Source:{' '}
+            <a href="https://en.wikipedia.org/wiki/Chronological_age" target="_blank" rel="noopener">
+              Chronological age – Wikipedia
+            </a>
+          </p>
+        </article>
+      </div>
     </section>
   );
 }

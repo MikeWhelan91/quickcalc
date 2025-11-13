@@ -26,25 +26,29 @@ export const metadata: Metadata = {
 const faqs = [
   {
     question: 'Is QuickCalc free to use?',
-    answer: 'Yes, all calculators on QuickCalc are completely free with no sign-up required.'
+    answer: 'Yes, every calculator is free with no sign-up, ads or paywalls so you can run as many scenarios as you need.'
   },
   {
     question: 'Are your calculators accurate?',
     answer:
-      'Our tools use well-known formulas and are tested against trusted references, but results should be verified for critical decisions.'
+      'Each tool is built on well-documented formulas and is regression-tested against trusted references. Still, you should double-check any output that affects legal, medical or financial commitments.'
   },
   {
     question: 'Do you store my data?',
-    answer: 'No personal data is stored. All calculations happen in your browser for privacy.'
+    answer: 'No personal inputs are persisted on our servers. Calculations run entirely in your browser and you can clear results by refreshing the page.'
   },
   {
     question: 'Can I use QuickCalc on mobile?',
-    answer: 'Absolutely. The site is fully responsive and works on phones, tablets and desktops.'
+    answer: 'Absolutely. The responsive layout is tuned for small screens, keyboards and screen readers so you can run calculations on the go.'
+  },
+  {
+    question: 'Can I embed QuickCalc on my site or wiki?',
+    answer: 'Yes, you can link directly to any calculator with preset query parameters. Full embeddable widgets are coming soon—reach out if you would like early access.'
   },
   {
     question: 'How can I report a problem or suggest a calculator?',
     answer:
-      'Reach out via the project issue tracker on GitHub or contact us at support@quickcalc.me.'
+      'Open an issue on GitHub or email support@quickcalc.me with the steps to reproduce your issue or details about the calculator you would like to see.'
   }
 ];
 
@@ -64,14 +68,29 @@ export default function Page() {
       <Script id="schema-faq" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(jsonLd)}
       </Script>
-      <section className="card faq">
-        <h1>Frequently Asked Questions</h1>
-        {faqs.map(f => (
-          <div key={f.question}>
-            <h3>{f.question}</h3>
-            <p>{f.answer}</p>
-          </div>
-        ))}
+      <section className="detail-section">
+        <div className="card detail-hero">
+          <p className="eyebrow">Support</p>
+          <h1>Frequently Asked Questions</h1>
+          <p>
+            Whether you care about cost, privacy or device support, this FAQ covers the most common QuickCalc
+            questions. All calculators share the same principles: instant math, no accounts and SEO-friendly content
+            you can reference anywhere.
+          </p>
+          <ul className="detail-list">
+            <li>Transparent pricing (it is free).</li>
+            <li>Clear data practices and security.</li>
+            <li>Ways to extend QuickCalc with embeds and feature requests.</li>
+          </ul>
+        </div>
+        <div className="faq-grid">
+          {faqs.map(f => (
+            <article key={f.question} className="card faq-item">
+              <h3>{f.question}</h3>
+              <p>{f.answer}</p>
+            </article>
+          ))}
+        </div>
       </section>
     </>
   );

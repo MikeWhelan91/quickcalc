@@ -85,19 +85,13 @@ export default function LoanClient(){
               cx="100"
               cy="100"
               r={RADIUS}
-              stroke="url(#loanGradient)"
+              stroke="var(--primary)"
               strokeWidth="24"
               strokeDasharray={`${interestShare * RING_CIRC} ${(1-interestShare) * RING_CIRC}`}
               strokeLinecap="round"
               fill="none"
               transform="rotate(-90 100 100)"
             />
-            <defs>
-              <linearGradient id="loanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="var(--accent)" />
-                <stop offset="100%" stopColor="var(--primary)" />
-              </linearGradient>
-            </defs>
             <text x="100" y="92" textAnchor="middle" fontSize="18" fontWeight="700" fill="var(--navy)">
               {Math.round(interestShare * 100)}%
             </text>

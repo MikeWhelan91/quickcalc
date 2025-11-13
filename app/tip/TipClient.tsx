@@ -52,18 +52,12 @@ export default function TipClient(){
       <div className="tip-result">
         <div className="tip-visual" aria-hidden="true">
           <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="presentation">
-            <defs>
-              <linearGradient id="tipGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="var(--accent)" />
-                <stop offset="100%" stopColor="var(--primary)" />
-              </linearGradient>
-            </defs>
             <circle cx={SIZE/2} cy={SIZE/2} r={RADIUS} stroke="rgba(15,31,58,0.1)" strokeWidth={STROKE} fill="none" />
             <circle
               cx={SIZE/2}
               cy={SIZE/2}
               r={RADIUS}
-              stroke="url(#tipGradient)"
+              stroke="var(--primary)"
               strokeWidth={STROKE}
               strokeDasharray={createDash(tipShare)}
               strokeLinecap="round"

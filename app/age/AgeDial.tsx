@@ -26,21 +26,11 @@ export default function AgeDial({ years, months, days, percent, expectancy }: Ag
   return (
     <div className="age-dial" aria-label={`Age dial showing ${ageLabel}`}>
       <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="presentation">
-        <defs>
-          <linearGradient id="ageDialGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="var(--accent)" />
-            <stop offset="100%" stopColor="var(--primary)" />
-          </linearGradient>
-          <linearGradient id="ageDialTrack" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgba(15,31,58,0.08)" />
-            <stop offset="100%" stopColor="rgba(15,31,58,0.18)" />
-          </linearGradient>
-        </defs>
         <circle
           cx={SIZE / 2}
           cy={SIZE / 2}
           r={RADIUS}
-          stroke="url(#ageDialTrack)"
+          stroke="rgba(15,31,58,0.12)"
           strokeWidth={STROKE}
           fill="none"
         />
@@ -49,7 +39,7 @@ export default function AgeDial({ years, months, days, percent, expectancy }: Ag
           cx={SIZE / 2}
           cy={SIZE / 2}
           r={RADIUS}
-          stroke="url(#ageDialGradient)"
+          stroke="var(--primary)"
           strokeWidth={STROKE}
           strokeDasharray={dash}
           strokeLinecap="round"

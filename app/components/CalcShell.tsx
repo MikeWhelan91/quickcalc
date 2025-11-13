@@ -5,19 +5,26 @@ import "./CalcShell.css";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
-export default function CalcShell({
-  title, subtitle, children, result
-}: { title: string; subtitle: string; children: ReactNode; result: ReactNode; }) {
+interface CalcShellProps {
+  title: string;
+  subtitle: string;
+  children: ReactNode;
+  result: ReactNode;
+}
+
+export default function CalcShell({ title, subtitle, children, result }: CalcShellProps) {
   return (
-    <section className="calc-shell grid grid-2">
-      <div className="card">
-        <h1 className={outfit.className} style={{ marginTop: 0 }}>{title}</h1>
-        <p className="small" style={{ marginTop: 6 }}>{subtitle}</p>
-        <div style={{ height: 12 }} />
-        {children}
+    <section className="calc-shell">
+      <div className="card calc-shell-panel">
+        <div className="calc-shell-head">
+          <p className="eyebrow">Calculator</p>
+          <h1 className={outfit.className}>{title}</h1>
+          <p className="small">{subtitle}</p>
+        </div>
+        <div className="calc-shell-body">{children}</div>
       </div>
-      <div className="card">
-        <div className="badge" style={{ marginBottom: 10 }}>Result</div>
+      <div className="card calc-shell-panel calc-shell-result">
+        <div className="badge" style={{ marginBottom: 12 }}>Result</div>
         {result}
       </div>
     </section>

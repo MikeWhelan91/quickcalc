@@ -12,8 +12,8 @@
 .biz-card {
   border-radius: 14px;
   padding: 14px 16px;
-  background: color-mix(in oklab,var(--primary) 10%, var(--card));
-  border: 1px solid color-mix(in oklab,var(--primary) 20%, var(--border));
+  background: #eef2ff;
+  border: 1px solid color-mix(in oklab,var(--primary) 18%, var(--border));
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -44,15 +44,15 @@
 }
 
 .biz-bar .segment.weekend {
-  background: linear-gradient(90deg, rgba(15,31,58,.15), rgba(15,31,58,.25));
+  background: rgba(15,31,58,0.2);
 }
 
 .biz-bar .segment.holiday {
-  background: linear-gradient(90deg, rgba(246,163,19,0.4), rgba(246,163,19,0.6));
+  background: rgba(247,103,7,0.55);
 }
 
 .biz-bar .segment.work {
-  background: linear-gradient(90deg, rgba(34,197,94,0.6), rgba(34,197,94,0.9));
+  background: var(--primary);
 }
 
 .biz-legend {
@@ -95,5 +95,5 @@
 }
 
 .dot.work {
-  background: #22c55e;
+  background: var(--primary);
 }
