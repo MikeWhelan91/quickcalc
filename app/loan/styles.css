@@ -12,8 +12,8 @@
 .loan-card {
   border-radius: 14px;
   padding: 14px 16px;
-  background: color-mix(in oklab,var(--primary) 12%, var(--card));
-  border: 1px solid color-mix(in oklab,var(--primary) 22%, var(--border));
+  background: #eef2ff;
+  border: 1px solid color-mix(in oklab,var(--primary) 20%, var(--border));
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -60,7 +60,7 @@
 }
 
 .bar .principal {
-  background: #22c55e;
+  background: var(--primary);
 }
 
 .bar .interest {

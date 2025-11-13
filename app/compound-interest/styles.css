@@ -12,8 +12,8 @@
 .compound-card {
   border-radius: 14px;
   padding: 14px 16px;
-  background: color-mix(in oklab,var(--primary) 12%, var(--card));
-  border: 1px solid color-mix(in oklab,var(--primary) 22%, var(--border));
+  background: #eef2ff;
+  border: 1px solid color-mix(in oklab,var(--primary) 20%, var(--border));
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -33,9 +33,9 @@
 
 .compound-chart {
   width: 100%;
-  background: color-mix(in oklab,var(--primary) 4%, var(--card));
+  background: #f8f9ff;
   border-radius: 20px;
-  border: 1px solid color-mix(in oklab,var(--primary) 18%, var(--border));
+  border: 1px solid color-mix(in oklab,var(--primary) 15%, var(--border));
   padding: 16px;
   box-sizing: border-box;
 }

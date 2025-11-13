@@ -2,7 +2,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import CalcShell from "../components/CalcShell";
-import Tooltip from "../components/Tooltip";
 import { schemas, CountryCode } from "@/lib/mortgage";
 import { clampNumberInput, clampNumberValue } from "@/lib/numbers";
 import "./styles.css";
@@ -128,10 +127,8 @@ export default function MortgageClient() {
             }
             return (
               <div key={f.id} className="form-field">
-                <div className="label-tooltip">
-                  <label htmlFor={f.id}>{label}</label>
-                  {f.tooltip && <Tooltip text={f.tooltip} />}
-                </div>
+                <label htmlFor={f.id}>{label}</label>
+                {f.tooltip && <p className="form-hint">{f.tooltip}</p>}
                 <input
                   id={f.id}
                   className="input"
@@ -140,7 +137,6 @@ export default function MortgageClient() {
                   value={rawValues[f.id] ?? ''}
                   onChange={e => handleFieldChange(f.id, e.target.value)}
                   onBlur={() => handleFieldBlur(f.id)}
-                  {...(f.tooltip ? { title: f.tooltip } : {})}
                 />
               </div>
             );
@@ -172,18 +168,12 @@ export default function MortgageClient() {
           </div>
           <div className="mortgage-breakdown">
             <svg width="220" height="220" viewBox="0 0 220 220" role="presentation" aria-hidden="true">
-              <defs>
-                <linearGradient id="mortgagePrincipal" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="var(--accent)" />
-                  <stop offset="100%" stopColor="var(--primary)" />
-                </linearGradient>
-              </defs>
               <circle cx="110" cy="110" r={RING_RADIUS} stroke="rgba(15,31,58,0.08)" strokeWidth="26" fill="none" />
               <circle
                 cx="110"
                 cy="110"
                 r={RING_RADIUS}
-                stroke="url(#mortgagePrincipal)"
+                stroke="var(--primary)"
                 strokeWidth="26"
                 strokeDasharray={`${breakdown.paymentShare * RING_CIRC} ${(1 - breakdown.paymentShare) * RING_CIRC}`}
                 strokeLinecap="butt"
@@ -232,9 +222,7 @@ export default function MortgageClient() {
     >
       <div className="grid grid-2">
         <div>
-          <div className="label-tooltip">
-            <label htmlFor="country">Country</label>
-          </div>
+          <label htmlFor="country">Country</label>
           <select
             id="country"
             className="input"
@@ -247,9 +235,7 @@ export default function MortgageClient() {
           </select>
         </div>
         <div>
-          <div className="label-tooltip">
-            <label htmlFor="currency">Currency</label>
-          </div>
+          <label htmlFor="currency">Currency</label>
           <select
             id="currency"
             className="input"

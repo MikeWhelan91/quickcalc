@@ -95,15 +95,9 @@ export default function CompoundClient() {
             </div>
           </div>
           <svg className="compound-chart" viewBox="0 0 600 260" role="img" aria-label="Projected balance over time">
-            <defs>
-              <linearGradient id="growthLine" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="var(--accent)" />
-                <stop offset="100%" stopColor="var(--primary)" />
-              </linearGradient>
-            </defs>
             <polyline
               fill="none"
-              stroke="url(#growthLine)"
+              stroke="var(--primary)"
               strokeWidth="4"
               points={growth
                 .map(p => {

@@ -13,7 +13,7 @@
   border-radius: 14px;
   border: 1px solid var(--border);
   padding: 12px 14px;
-  background: color-mix(in oklab,var(--primary) 12%, var(--card));
+  background: #eef2ff;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -52,7 +52,7 @@
 .bmi-bar-fill {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, var(--accent), var(--primary));
+  background: var(--primary);
   border-radius: inherit;
 }
 
@@ -69,8 +69,8 @@
   justify-content: space-between;
   border-radius: 14px;
   padding: 12px 16px;
-  border: 1px solid color-mix(in oklab,var(--primary) 18%, var(--border));
-  background: color-mix(in oklab,var(--primary) 6%, var(--card));
+  border: 1px solid color-mix(in oklab,var(--primary) 15%, var(--border));
+  background: #f8f9ff;
   flex-wrap: wrap;
   gap: 4px 12px;
 }
@@ -101,8 +101,8 @@
 }
 
 .bmi-info {
-  background: color-mix(in oklab,var(--primary) 3%, var(--card));
-  border-color: color-mix(in oklab,var(--primary) 18%, var(--border));
+  background: #fdfdfd;
+  border-color: color-mix(in oklab,var(--primary) 12%, var(--border));
 }
 
 .bmi-info img {

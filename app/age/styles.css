@@ -38,16 +38,16 @@
 .metric-card {
   border-radius: 14px;
   border: 1px solid var(--border);
-  background: color-mix(in oklab, var(--card) 85%, var(--primary) 15%);
+  background: #eef2ff;
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
 }
 
 .metric-card.highlight {
-  background: linear-gradient(135deg, color-mix(in oklab,var(--accent) 60%, var(--card)), var(--card));
+  background: #fff4e6;
+  border-color: color-mix(in oklab,var(--accent) 30%, var(--border));
 }
 
 .metric-title {
@@ -69,8 +69,8 @@
   gap: 10px;
   padding: 12px;
   border-radius: 14px;
-  background: color-mix(in oklab,var(--primary) 8%, var(--card));
-  border: 1px solid color-mix(in oklab,var(--primary) 18%, var(--border));
+  background: #f8f9ff;
+  border: 1px solid color-mix(in oklab,var(--primary) 15%, var(--border));
 }
 
 .timeline-row {
@@ -93,7 +93,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent), var(--primary));
+  background: var(--primary);
 }
 
 @media (max-width: 640px) {
